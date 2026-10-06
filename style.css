@@ -127,31 +127,7 @@ p {
     max-width: 100px;
     margin: 15px auto;
 }
-
-/* ============== RESPONSIVIDADE PARA CELULARES ============== */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        gap: 12px;
-        padding: 15px 3%;
-    }
-
-    nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
-
-    .botoes-header {
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    main, .container {
-        padding: 15px 4%;
-    } 
+ 
     /* ============== RESPONSIVIDADE PARA CELULARES ============== */
 
 /* Evita a barra de rolagem horizontal indesejada no corpo da página */
