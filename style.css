@@ -1927,76 +1927,81 @@ ul li::marker{
     }
 }
 /* ==========================================
-   AJUSTES RESPONSIVOS ESPECÍFICOS PARA PRODUTOS E DEMAIS PÁGINAS
+   AJUSTES RESPONSIVOS FORÇADOS PARA PRODUTOS E MÓVEIS
    ========================================== */
 
-@media (max-width: 768px) {
-    /* --- ESTRUTURA GERAL DA PÁGINA DE PRODUTOS --- */
-    .produtos {
-        padding: 20px 3%;
+@media screen and (max-width: 768px) {
+    /* --- ESTRUTURA DA PÁGINA DE PRODUTOS --- */
+    .produtos, #produtos {
+        padding: 20px 3% !important;
     }
 
     .produtos-container {
-        flex-direction: column;
-        width: 100%;
-        gap: 20px;
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 20px !important;
     }
 
     /* --- PAINEL DE FILTROS --- */
     .painel-filtros {
-        width: 100%;
-        flex: 1 1 100%;
+        width: 100% !important;
+        flex: 1 1 100% !important;
+        box-sizing: border-box !important;
     }
 
-    /* --- WRAPPER DO CATÁLOGO E GRADE DE PRODUTOS --- */
+    /* --- WRAPPER E CATÁLOGO DE PRODUTOS --- */
     .catalogo-wrapper {
-        width: 100%;
-        flex: 1 1 100%;
+        width: 100% !important;
+        flex: 1 1 100% !important;
+        min-width: 0 !important;
     }
 
     .lista-produtos {
-        /* Exibe os cards de produtos ajustados para o tamanho da tela do celular */
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 12px;
+        display: grid !important;
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)) !important;
+        gap: 10px !important;
+        width: 100% !important;
     }
 
     /* --- CARDS DOS PRODUTOS --- */
-    .produto {
-        padding: 10px;
+    .card-produto, .produto, #produtos .produto {
+        padding: 10px !important;
+        box-sizing: border-box !important;
     }
 
     .produto-imagem {
-        height: 140px;
-        margin-bottom: 8px;
+        height: 130px !important;
+        margin-bottom: 8px !important;
     }
 
     .produto h3 {
-        font-size: 0.9rem;
+        font-size: 0.85rem !important;
     }
 
     .produto p {
-        font-size: 0.75rem;
+        font-size: 0.75rem !important;
     }
 
     .produto strong {
-        font-size: 0.95rem;
-        margin-bottom: 8px;
+        font-size: 0.9rem !important;
+        margin-bottom: 8px !important;
     }
 
     .botao-comprar {
-        font-size: 0.8rem;
-        padding: 8px 4px;
+        font-size: 0.75rem !important;
+        padding: 8px 4px !important;
     }
 
-    /* --- CONTROLES DE PAGINAÇÃO --- */
+    /* --- PAGINAÇÃO --- */
     .paginacao {
-        flex-wrap: wrap;
-        gap: 5px;
-        margin-top: 20px;
+        flex-wrap: wrap !important;
+        gap: 5px !important;
+        margin-top: 20px !important;
     }
 
     .paginacao button {
-        padding: 6px 10px;
-        font-size: 0.8rem;
+        padding: 6px 10px !important;
+        font-size: 0.8rem !important;
     }
 }
