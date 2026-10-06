@@ -119,6 +119,29 @@ if (formContato) {
 // ==========================================
 // 3. PRODUTOS, FILTROS, CARRINHO, CHECKOUT E MEUS PEDIDOS
 // ==========================================
+// Funções Globais de Storage e Auxiliares
+function obterCarrinho() {
+    return JSON.parse(localStorage.getItem('carrinho')) || [];
+}
+
+function salvarCarrinho(carrinho) {
+    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+}
+
+function obterPedidosDoUsuario() {
+    const usuarioLogado = localStorage.getItem('usuarioLogado');
+    if (!usuarioLogado) return null;
+    return JSON.parse(localStorage.getItem(`pedidos_${usuarioLogado}`)) || [];
+}
+
+function salvarPedidoUsuario(novoPedido) {
+    const usuarioLogado = localStorage.getItem('usuarioLogado');
+    if (!usuarioLogado) return;
+    const pedidos = obterPedidosDoUsuario() || [];
+    pedidos.unshift(novoPedido);
+    localStorage.setItem(`pedidos_${usuarioLogado}`, JSON.stringify(pedidos));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const produtos = [
         { id: 1, nome: "Camiseta Leão de Judá", preco: 79.90, cor: "preto", tamanhos: ["P", "M", "G", "GG"], imagem: "./imagens/produto1.jpg" },
@@ -153,36 +176,12 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 30, nome: "Camiseta Grace & Peace", preco: 69.90, cor: "branco", tamanhos: ["M", "G"], imagem: "./imagens/produto1.jpg" }
     ];
 
-    // Estados da Aplicação
     let produtosFiltrados = [...produtos];
     let paginaAtual = 1;
     const itensPorPagina = 4;
 
-    // --- GERENCIAMENTO DE STORAGE DO CARRINHO E PEDIDOS ---
-    function obterCarrinho() {
-        return JSON.parse(localStorage.getItem('carrinho')) || [];
-    }
-
-    function salvarCarrinho(carrinho) {
-        localStorage.setItem('carrinho', JSON.stringify(carrinho));
-    }
-
-    function obterPedidosDoUsuario() {
-        const usuarioLogado = localStorage.getItem('usuarioLogado');
-        if (!usuarioLogado) return null; // Retorna null se não houver utilizador logado
-        return JSON.parse(localStorage.getItem(`pedidos_${usuarioLogado}`)) || [];
-    }
-
-    function salvarPedidoUsuario(novoPedido) {
-        const usuarioLogado = localStorage.getItem('usuarioLogado');
-        if (!usuarioLogado) return;
-        const pedidos = obterPedidosDoUsuario() || [];
-        pedidos.unshift(novoPedido); // Adiciona o pedido mais recente no início
-        localStorage.setItem(`pedidos_${usuarioLogado}`, JSON.stringify(pedidos));
-    }
-
-    // Elementos do DOM - Catálogo e Filtros
-    const listaProdutosEl = document.getElementById('lista-produtos');
+    // Procura o elemento pelo ID 'lista-produtos' ou por 'produtos' como alternativa
+    const listaProdutosEl = document.getElementById('lista-produtos') || document.getElementById('produtos');
     const paginacaoEl = document.getElementById('paginacao');
     const filtroPrecoEl = document.getElementById('filtro-preco');
     const valorPrecoEl = document.getElementById('valor-preco');
@@ -190,15 +189,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const checkboxesCor = document.querySelectorAll('input[name="cor"]');
     const btnLimparFiltros = document.getElementById('limpar-filtros');
 
-    // Elementos do DOM - Carrinho Modal
+    // Elementos do Carrinho
     const btnCarrinho = document.getElementById('botao-carrinho');
     const carrinhoModal = document.getElementById('carrinho-modal');
     const btnFecharCarrinho = document.getElementById('fechar-carrinho');
     const itensCarrinhoEl = document.getElementById('itens-carrinho');
-    const contadorCarrinhoEl = document.getElementById('contador-carrinho');
     const totalCarrinhoEl = document.getElementById('total-carrinho');
 
-    // Abrir e fechar carrinho lateral
     const abrirCarrinho = () => carrinhoModal && carrinhoModal.classList.add('ativo');
     const fecharCarrinho = () => carrinhoModal && carrinhoModal.classList.remove('ativo');
 
@@ -213,27 +210,19 @@ document.addEventListener('DOMContentLoaded', () => {
             fecharCarrinho();
         });
 
-        carrinhoModal.addEventListener('click', (e) => {
-            e.stopPropagation();
-        });
+        carrinhoModal.addEventListener('click', (e) => e.stopPropagation());
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' || e.key === 'Esc') {
-                fecharCarrinho();
-            }
+            if (e.key === 'Escape' || e.key === 'Esc') fecharCarrinho();
         });
     }
 
-    // --- MÉTODOS DO CARRINHO ---
+    // Métodos Globais do Carrinho
     window.adicionarAoCarrinho = function(itemOuId) {
         let carrinho = obterCarrinho();
-        let produto;
-
-        if (typeof itemOuId === 'object' && itemOuId !== null) {
-            produto = itemOuId;
-        } else {
-            produto = produtos.find(p => p.id === itemOuId);
-        }
+        let produto = (typeof itemOuId === 'object' && itemOuId !== null)
+            ? itemOuId
+            : produtos.find(p => p.id === itemOuId);
 
         if (!produto) return;
 
@@ -322,27 +311,129 @@ document.addEventListener('DOMContentLoaded', () => {
         renderizarResumoCheckout();
     };
 
-    // Redirecionamento do Botão de Finalizar Compra no Modal
-    const btnFinalizarCompra = document.getElementById('btn-finalizar-compra');
-    if (btnFinalizarCompra) {
-        btnFinalizarCompra.addEventListener('click', (e) => {
-            const carrinho = obterCarrinho();
-            if (!carrinho || carrinho.length === 0) {
-                e.preventDefault();
-                alert('Seu carrinho está vazio! Adicione produtos antes de finalizar.');
+    // Renderização dos Produtos na Grelha
+    function renderizarProdutos() {
+        if (!listaProdutosEl) return;
+        listaProdutosEl.innerHTML = '';
+
+        if (produtosFiltrados.length === 0) {
+            listaProdutosEl.innerHTML = '<p class="sem-produtos">Nenhuma camiseta encontrada com os filtros selecionados.</p>';
+            if (paginacaoEl) paginacaoEl.innerHTML = '';
+            return;
+        }
+
+        const inicio = (paginaAtual - 1) * itensPorPagina;
+        const fim = inicio + itensPorPagina;
+        const produtosPagina = produtosFiltrados.slice(inicio, fim);
+
+        produtosPagina.forEach(prod => {
+            const card = document.createElement('article');
+            card.className = 'card-produto produto';
+            card.innerHTML = `
+                <div class="produto-imagem">
+                    <img src="${prod.imagem}" alt="${prod.nome}" class="imagem-produto">
+                </div>
+                <h3>${prod.nome}</h3>
+                <p>Tamanhos: ${prod.tamanhos.join(' | ')}</p>
+                <strong>R$ ${prod.preco.toFixed(2).replace('.', ',')}</strong>
+                <button type="button" class="botao-comprar" onclick="adicionarAoCarrinho(${prod.id})">Adicionar ao carrinho</button>
+            `;
+            listaProdutosEl.appendChild(card);
+        });
+
+        renderizarPaginacao();
+    }
+
+    function renderizarPaginacao() {
+        if (!paginacaoEl) return;
+        paginacaoEl.innerHTML = '';
+        const totalPaginas = Math.ceil(produtosFiltrados.length / itensPorPagina);
+        if (totalPaginas <= 1) return;
+
+        const btnAnterior = document.createElement('button');
+        btnAnterior.className = 'btn-pagina btn-nav';
+        btnAnterior.textContent = '« Anterior';
+        btnAnterior.disabled = paginaAtual === 1;
+        btnAnterior.addEventListener('click', () => {
+            if (paginaAtual > 1) {
+                paginaAtual--;
+                renderizarProdutos();
             }
+        });
+        paginacaoEl.appendChild(btnAnterior);
+
+        for (let i = 1; i <= totalPaginas; i++) {
+            const btnPagina = document.createElement('button');
+            btnPagina.className = `btn-pagina ${i === paginaAtual ? 'ativa' : ''}`;
+            btnPagina.textContent = i;
+            btnPagina.addEventListener('click', () => {
+                paginaAtual = i;
+                renderizarProdutos();
+            });
+            paginacaoEl.appendChild(btnPagina);
+        }
+
+        const btnProximo = document.createElement('button');
+        btnProximo.className = 'btn-pagina btn-nav';
+        btnProximo.textContent = 'Próximo »';
+        btnProximo.disabled = paginaAtual === totalPaginas;
+        btnProximo.addEventListener('click', () => {
+            if (paginaAtual < totalPaginas) {
+                paginaAtual++;
+                renderizarProdutos();
+            }
+        });
+        paginacaoEl.appendChild(btnProximo);
+    }
+
+    // Filtros
+    function aplicarFiltros() {
+        const precoMaximo = filtroPrecoEl ? parseFloat(filtroPrecoEl.value) : 200;
+        const tamanhosSelecionados = Array.from(checkboxesTamanho)
+            .filter(cb => cb.checked)
+            .map(cb => cb.value);
+        const coresSelecionadas = Array.from(checkboxesCor)
+            .filter(cb => cb.checked)
+            .map(cb => cb.value);
+
+        produtosFiltrados = produtos.filter(prod => {
+            const atendePreco = prod.preco <= precoMaximo;
+            const atendeCor = coresSelecionadas.length === 0 || coresSelecionadas.includes(prod.cor);
+            const atendeTamanho = tamanhosSelecionados.length === 0 || 
+                prod.tamanhos.some(tam => tamanhosSelecionados.includes(tam));
+            return atendePreco && atendeCor && atendeTamanho;
+        });
+        paginaAtual = 1;
+        renderizarProdutos();
+    }
+
+    if (filtroPrecoEl) {
+        filtroPrecoEl.addEventListener('input', (e) => {
+            if (valorPrecoEl) valorPrecoEl.textContent = e.target.value;
+            aplicarFiltros();
         });
     }
 
-    // --- TELA DE CHECKOUT ---
+    checkboxesTamanho.forEach(cb => cb.addEventListener('change', aplicarFiltros));
+    checkboxesCor.forEach(cb => cb.addEventListener('change', aplicarFiltros));
+
+    if (btnLimparFiltros) {
+        btnLimparFiltros.addEventListener('click', () => {
+            checkboxesTamanho.forEach(cb => cb.checked = false);
+            checkboxesCor.forEach(cb => cb.checked = false);
+            if (filtroPrecoEl) filtroPrecoEl.value = 200;
+            if (valorPrecoEl) valorPrecoEl.textContent = '200';
+            aplicarFiltros();
+        });
+    }
+
+    // Finalização de Pedido e Meus Pedidos
     function renderizarResumoCheckout() {
         const resumoContainer = document.getElementById('resumo-itens-container');
         const totalCheckout = document.getElementById('total-checkout');
-
         if (!resumoContainer || !totalCheckout) return;
 
         const carrinho = obterCarrinho();
-
         if (carrinho.length === 0) {
             resumoContainer.innerHTML = '<p class="carrinho-vazio">Seu carrinho está vazio.</p>';
             totalCheckout.textContent = '0,00';
@@ -369,58 +460,12 @@ document.addEventListener('DOMContentLoaded', () => {
         totalCheckout.textContent = valorTotal.toFixed(2).replace('.', ',');
     }
 
-    const formCheckout = document.getElementById('form-checkout');
-    if (formCheckout) {
-        formCheckout.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const usuarioLogado = localStorage.getItem('usuarioLogado');
-            if (!usuarioLogado) {
-                alert('Para finalizar o pedido, por favor faça o login na sua conta.');
-                if (window.abrirModalLogin) window.abrirModalLogin();
-                return;
-            }
-
-            const carrinhoAtual = obterCarrinho();
-            if (carrinhoAtual.length === 0) {
-                alert('Seu carrinho está vazio!');
-                return;
-            }
-
-            // Criar objeto do pedido finalizado
-            const valorTotal = carrinhoAtual.reduce((sum, i) => sum + i.preco * (i.quantidade || 1), 0);
-            const novoPedido = {
-                idPedido: Math.floor(100000 + Math.random() * 900000), // Número aleatório de 6 dígitos
-                data: new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
-                itens: carrinhoAtual,
-                total: valorTotal,
-                status: "Em processamento"
-            };
-
-            // Guarda o pedido na lista do utilizador
-            salvarPedidoUsuario(novoPedido);
-
-            alert("Compra realizada com sucesso! Obrigado por comprar na The King's Son. Seu pedido chegará no endereço informado de 3 a 5 dias úteis!!");
-            
-            // Esvazia o carrinho de compras
-            localStorage.removeItem('carrinho');
-            atualizarCarrinho();
-
-            // Atualiza a visualização dos pedidos na aba Meus Pedidos se estiver visível
-            renderizarMeusPedidos();
-
-            window.location.href = '#meus-pedidos';
-        });
-    }
-
-    // --- RENDERIZAÇÃO DA ABA MEUS PEDIDOS ---
     function renderizarMeusPedidos() {
         const containerMeusPedidos = document.getElementById('conteudo-meus-pedidos');
         if (!containerMeusPedidos) return;
 
         const pedidos = obterPedidosDoUsuario();
 
-        // Caso 1: Utilizador deslogado
         if (pedidos === null) {
             containerMeusPedidos.innerHTML = `
                 <div class="mensagem-login-necessario">
@@ -431,15 +476,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Caso 2: Utilizador logado mas sem pedidos registrados
         if (pedidos.length === 0) {
-            containerMeusPedidos.innerHTML = `
-                <p class="carrinho-vazio">Você ainda não realizou nenhum pedido.</p>
-            `;
+            containerMeusPedidos.innerHTML = `<p class="carrinho-vazio">Você ainda não realizou nenhum pedido.</p>`;
             return;
         }
 
-        // Caso 3: Renderiza os pedidos efetuados pelo utilizador
         containerMeusPedidos.innerHTML = '';
         pedidos.forEach(pedido => {
             const cardPedido = document.createElement('div');
@@ -475,126 +516,53 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- RENDERIZAÇÃO E PAGINAÇÃO DO CATÁLOGO ---
-    function renderizarProdutos() {
-        if (!listaProdutosEl) return;
-        listaProdutosEl.innerHTML = '';
-        if (produtosFiltrados.length === 0) {
-            listaProdutosEl.innerHTML = '<p class="sem-produtos">Nenhuma camiseta encontrada com os filtros selecionados.</p>';
-            if (paginacaoEl) paginacaoEl.innerHTML = '';
-            return;
-        }
-        const inicio = (paginaAtual - 1) * itensPorPagina;
-        const fim = inicio + itensPorPagina;
-        const produtosPagina = produtosFiltrados.slice(inicio, fim);
-        produtosPagina.forEach(prod => {
-            const card = document.createElement('article');
-            card.className = 'card-produto';
-            card.innerHTML = `
-                <img src="${prod.imagem}" alt="${prod.nome}" class="imagem-produto">
-                <div class="info-produto">
-                    <h3 class="nome-produto">${prod.nome}</h3>
-                    <p class="detalhes-produto">Tamanhos: ${prod.tamanhos.join(', ')}</p>
-                    <p class="preco-produto">R$ ${prod.preco.toFixed(2).replace('.', ',')}</p>
-                    <button type="button" class="botao-comprar" onclick="adicionarAoCarrinho(${prod.id})">Adicionar ao Carrinho</button>
-                </div>
-            `;
-            listaProdutosEl.appendChild(card);
-        });
-        renderizarPaginacao();
-    }
+    const formCheckout = document.getElementById('form-checkout');
+    if (formCheckout) {
+        formCheckout.addEventListener('submit', (e) => {
+            e.preventDefault();
 
-    function renderizarPaginacao() {
-        if (!paginacaoEl) return;
-        paginacaoEl.innerHTML = '';
-        const totalPaginas = Math.ceil(produtosFiltrados.length / itensPorPagina);
-        if (totalPaginas <= 1) return;
-
-        const btnAnterior = document.createElement('button');
-        btnAnterior.className = 'btn-pagina btn-nav';
-        btnAnterior.textContent = '« Anterior';
-        btnAnterior.disabled = paginaAtual === 1;
-        btnAnterior.addEventListener('click', () => {
-            if (paginaAtual > 1) {
-                paginaAtual--;
-                renderizarProdutos();
-                document.getElementById('produtos').scrollIntoView({ behavior: 'smooth' });
+            const usuarioLogado = localStorage.getItem('usuarioLogado');
+            if (!usuarioLogado) {
+                alert('Para finalizar o pedido, por favor faça o login na sua conta.');
+                if (window.abrirModalLogin) window.abrirModalLogin();
+                return;
             }
-        });
-        paginacaoEl.appendChild(btnAnterior);
 
-        for (let i = 1; i <= totalPaginas; i++) {
-            const btnPagina = document.createElement('button');
-            btnPagina.className = `btn-pagina ${i === paginaAtual ? 'ativa' : ''}`;
-            btnPagina.textContent = i;
-            btnPagina.addEventListener('click', () => {
-                paginaAtual = i;
-                renderizarProdutos();
-                document.getElementById('produtos').scrollIntoView({ behavior: 'smooth' });
-            });
-            paginacaoEl.appendChild(btnPagina);
-        }
-
-        const btnProximo = document.createElement('button');
-        btnProximo.className = 'btn-pagina btn-nav';
-        btnProximo.textContent = 'Próximo »';
-        btnProximo.disabled = paginaAtual === totalPaginas;
-        btnProximo.addEventListener('click', () => {
-            if (paginaAtual < totalPaginas) {
-                paginaAtual++;
-                renderizarProdutos();
-                document.getElementById('produtos').scrollIntoView({ behavior: 'smooth' });
+            const carrinhoAtual = obterCarrinho();
+            if (carrinhoAtual.length === 0) {
+                alert('Seu carrinho está vazio!');
+                return;
             }
-        });
-        paginacaoEl.appendChild(btnProximo);
-    }
 
-    // --- FILTRAGEM DE PRODUTOS ---
-    function aplicarFiltros() {
-        const precoMaximo = parseFloat(filtroPrecoEl.value);
-        const tamanhosSelecionados = Array.from(checkboxesTamanho)
-            .filter(cb => cb.checked)
-            .map(cb => cb.value);
-        const coresSelecionadas = Array.from(checkboxesCor)
-            .filter(cb => cb.checked)
-            .map(cb => cb.value);
+            const valorTotal = carrinhoAtual.reduce((sum, i) => sum + i.preco * (i.quantidade || 1), 0);
+            const novoPedido = {
+                idPedido: Math.floor(100000 + Math.random() * 900000),
+                data: new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+                itens: carrinhoAtual,
+                total: valorTotal,
+                status: "Em processamento"
+            };
 
-        produtosFiltrados = produtos.filter(prod => {
-            const atendePreco = prod.preco <= precoMaximo;
-            const atendeCor = coresSelecionadas.length === 0 || coresSelecionadas.includes(prod.cor);
-            const atendeTamanho = tamanhosSelecionados.length === 0 || 
-                prod.tamanhos.some(tam => tamanhosSelecionados.includes(tam));
-            return atendePreco && atendeCor && atendeTamanho;
-        });
-        paginaAtual = 1;
-        renderizarProdutos();
-    }
+            salvarPedidoUsuario(novoPedido);
+            alert("Compra realizada com sucesso! Obrigado por comprar na The King's Son. Seu pedido chegará até você de 3 à 5 dias úteis!");
 
-    if (filtroPrecoEl) {
-        filtroPrecoEl.addEventListener('input', (e) => {
-            valorPrecoEl.textContent = e.target.value;
-            aplicarFiltros();
-        });
-    }
-    checkboxesTamanho.forEach(cb => cb.addEventListener('change', aplicarFiltros));
-    checkboxesCor.forEach(cb => cb.addEventListener('change', aplicarFiltros));
-    if (btnLimparFiltros) {
-        btnLimparFiltros.addEventListener('click', () => {
-            checkboxesTamanho.forEach(cb => cb.checked = false);
-            checkboxesCor.forEach(cb => cb.checked = false);
-            filtroPrecoEl.value = 200;
-            valorPrecoEl.textContent = '200';
-            aplicarFiltros();
+            localStorage.removeItem('carrinho');
+            atualizarCarrinho();
+            renderizarMeusPedidos();
+            window.location.href = '#meus-pedidos';
         });
     }
 
-    // --- INICIALIZAÇÃO DA PÁGINA ---
+    // Inicialização da interface
     renderizarProdutos();
     atualizarCarrinho();
     renderizarResumoCheckout();
     renderizarMeusPedidos();
 });
 
+// ==========================================
+// 4. LÓGICA DE PAGAMENTO (PIX / CARTÃO)
+// ==========================================
 document.addEventListener("DOMContentLoaded", function () {
     const selectPagamento = document.getElementById("pagamento-checkout");
     const boxCartao = document.getElementById("box-pagamento-cartao");
@@ -603,7 +571,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const btnCopiarPix = document.getElementById("btn-copiar-pix");
     const mensagemCopiado = document.getElementById("mensagem-copiado");
 
-    // Seleção de campos do cartão para alternar obrigatoriedade
     const camposCartaoObrigatorios = [
         document.getElementById("cartao-nome"),
         document.getElementById("cartao-bandeira"),
@@ -613,32 +580,31 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("cartao-cvv")
     ];
 
-    // Gerador de Payload Pix Estático Fictício
     function gerarChavePixFicticia() {
         const hex = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-        return `00020126580014br.thekingsson.bcb.rocky.vaicorithians.pix.0136${hex()}${hex()}-${hex()}-4000-8000-${hex()}${hex()}520400005303986540500.005802BR5915THE KINGS SON6009SAO PAULO62070503***6304${hex().toUpperCase()}`;
+        return `0814br.thekingsson.rockyodemocão.vaicorinthians.bcb.pix.0136${hex()}${hex()}-${hex()}-4000-8000-${hex()}${hex()}520400005303986540500.005802BR5915THE KINGS SON6009SAO PAULO62070503***6304${hex().toUpperCase()}`;
     }
 
     if (selectPagamento) {
         selectPagamento.addEventListener("change", function () {
             const opcao = this.value;
 
-            boxCartao.classList.add("escondido");
-            boxPix.classList.add("escondido");
+            if (boxCartao) boxCartao.classList.add("escondido");
+            if (boxPix) boxPix.classList.add("escondido");
 
             camposCartaoObrigatorios.forEach(campo => {
                 if (campo) campo.removeAttribute("required");
             });
 
             if (opcao === "cartao-credito" || opcao === "cartao-debito") {
-                boxCartao.classList.remove("escondido");
+                if (boxCartao) boxCartao.classList.remove("escondido");
                 camposCartaoObrigatorios.forEach(campo => {
                     if (campo) campo.setAttribute("required", "required");
                 });
             } else if (opcao === "pix") {
-                boxPix.classList.remove("escondido");
-                inputCodigoPix.value = gerarChavePixFicticia();
-                mensagemCopiado.classList.add("escondido");
+                if (boxPix) boxPix.classList.remove("escondido");
+                if (inputCodigoPix) inputCodigoPix.value = gerarChavePixFicticia();
+                if (mensagemCopiado) mensagemCopiado.classList.add("escondido");
             }
         });
     }
@@ -647,10 +613,12 @@ document.addEventListener("DOMContentLoaded", function () {
         btnCopiarPix.addEventListener("click", function () {
             if (inputCodigoPix && inputCodigoPix.value) {
                 navigator.clipboard.writeText(inputCodigoPix.value).then(() => {
-                    mensagemCopiado.classList.remove("escondido");
-                    setTimeout(() => {
-                        mensagemCopiado.classList.add("escondido");
-                    }, 4000);
+                    if (mensagemCopiado) {
+                        mensagemCopiado.classList.remove("escondido");
+                        setTimeout(() => {
+                            mensagemCopiado.classList.add("escondido");
+                        }, 4000);
+                    }
                 });
             }
         });
