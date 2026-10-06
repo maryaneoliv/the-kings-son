@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The King's Son | Finalizar Compra</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="topo">
+    <!-- CABEÇALHO DA PÁGINA -->
+    <header>
+        <div class="logo">
+            <img src="./imagens/logopng.png" alt="Logo da marca The King's Son">
+            <h1>The King's Son</h1>
+        </div>
+        <nav aria-label="Navegação Principal">
+            <a href="./index.html">INÍCIO</a>
+            <a href="./produtos.html">PRODUTOS</a>
+            <a href="./sobrenos.html">SOBRE NÓS</a>
+            <a href="./contato.html">CONTATO</a>
+            <button type="button" id="botao-login-modal" class="botao-entrar">ENTRAR / CADASTRAR</button>
+            <button type="button" id="botao-carrinho" class="botao-carrinho" aria-label="Abrir carrinho de compras">
+                <img src="./imagens/carrinho.png" alt="Carrinho de compras" class="icone-carrinho-img">
+                <span id="contador-carrinho" class="contador-carrinho">0</span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- CORPO DA PÁGINA -->
+    <main class="checkout-secao">
+        <div class="checkout-header">
+            <h2>FINALIZAR COMPRA</h2>
+            <p class="subtitulo">Preencha seus dados para concluir o pedido</p>
+        </div>
+
+        <div class="checkout-container">
+            <!-- FORMULÁRIO DE ENTREGA E PAGAMENTO -->
+            <section class="formulario">
+                <h3>Dados para entrega e pagamento</h3>
+                <form id="form-checkout">
+                    <div class="grupo-input">
+                        <label for="nome-checkout">Nome completo</label>
+                        <input type="text" id="nome-checkout" placeholder="Digite seu nome" required autocomplete="name">
+                    </div>
+
+                    <div class="grupo-input">
+                        <label for="email-checkout">E-mail</label>
+                        <input type="email" id="email-checkout" placeholder="Digite seu e-mail" required autocomplete="email">
+                    </div>
+
+                    <div class="campo-duplo">
+                        <div class="grupo-input">
+                            <label for="cep-checkout">CEP</label>
+                            <input type="text" id="cep-checkout" placeholder="00000-000" maxlength="9" inputmode="numeric" required>
+                        </div>
+                        <div class="grupo-input flex-2">
+                            <label for="endereco-checkout">Endereço completo</label>
+                            <input type="text" id="endereco-checkout" placeholder="Rua, número, bairro" required autocomplete="street-address">
+                        </div>
+                    </div>
+
+                    <div class="grupo-input">
+                        <label for="pagamento-checkout">Forma de pagamento</label>
+                        <select id="pagamento-checkout" required>
+                            <option value="">Escolha uma opção</option>
+                            <option value="cartao-credito">Cartão de Crédito</option>
+                            <option value="cartao-debito">Cartão de Débito</option>
+                            <option value="pix">Pix (Aprovação Instantânea)</option>
+                        </select>
+                    </div>
+
+                    <!-- BOX DINÂMICA: CARTÃO DE CRÉDITO OU DÉBITO -->
+                    <div id="box-pagamento-cartao" class="box-dinamica-pagamento escondido">
+                        <h4>Dados do Cartão</h4>
+                        
+                        <div class="grupo-input">
+                            <label for="cartao-apelido">Apelido do Cartão <span class="opcional">(Opcional)</span></label>
+                            <input type="text" id="cartao-apelido" placeholder="Ex: Meu Cartão Principal">
+                        </div>
+
+                        <div class="campo-duplo">
+                            <div class="grupo-input flex-2">
+                                <label for="cartao-nome">Nome impresso no cartão</label>
+                                <input type="text" id="cartao-nome" placeholder="Como no cartão">
+                            </div>
+                            <div class="grupo-input">
+                                <label for="cartao-bandeira">Bandeira</label>
+                                <select id="cartao-bandeira">
+                                    <option value="">Selecione</option>
+                                    <option value="visa">Visa</option>
+                                    <option value="mastercard">Mastercard</option>
+                                    <option value="elo">Elo</option>
+                                    <option value="hipercard">Hipercard</option>
+                                    <option value="amex">American Express</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="campo-duplo">
+                            <div class="grupo-input flex-2">
+                                <label for="cartao-numero">Número do cartão</label>
+                                <input type="text" id="cartao-numero" placeholder="0000 0000 0000 0000" maxlength="19" inputmode="numeric">
+                            </div>
+                            <div class="grupo-input">
+                                <label for="cartao-cpf">CPF do Titular</label>
+                                <input type="text" id="cartao-cpf" placeholder="000.000.000-00" maxlength="14" inputmode="numeric">
+                            </div>
+                        </div>
+
+                        <div class="campo-duplo">
+                            <div class="grupo-input">
+                                <label for="cartao-validade">Data de validade</label>
+                                <input type="text" id="cartao-validade" placeholder="MM/AA" maxlength="5" inputmode="numeric">
+                            </div>
+                            <div class="grupo-input">
+                                <label for="cartao-cvv">CVV</label>
+                                <input type="password" id="cartao-cvv" placeholder="123" maxlength="4" inputmode="numeric">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BOX DINÂMICA: PIX -->
+                    <div id="box-pagamento-pix" class="box-dinamica-pagamento escondido">
+                        <h4>Pagamento via Pix</h4>
+                        <p class="instrucao-pix">Escolha pagar via Pix pelo seu Internet Banking ou app de pagamentos. Depois, cole o seguinte código:</p>
+                        <div class="container-codigo-pix">
+                            <input type="text" id="codigo-pix" readonly>
+                            <button type="button" id="btn-copiar-pix" class="botao-copiar-pix">Copiar Código</button>
+                        </div>
+                        <span id="mensagem-copiado" class="mensagem-copiado escondido">✓ Código Pix copiado!</span>
+                    </div>
+
+                    <button type="submit" class="botao-submit botao-checkout">FINALIZAR PEDIDO</button>
+                </form>
+            </section>
+
+            <!-- RESUMO DO PEDIDO -->
+            <section class="resumo">
+                <h3>Resumo do pedido</h3>
+                <div id="resumo-itens-container" class="resumo-itens">
+                    <!-- Itens inseridos via JS -->
+                </div>
+
+                <div class="resumo-calculo">
+                    <div class="resumo-linha">
+                        <span>Frete</span>
+                        <span class="destaque-frete">Grátis</span>
+                    </div>
+                    <div class="resumo-linha total">
+                        <span>Total</span>
+                        <span>R$ <span id="total-checkout">0,00</span></span>
+                    </div>
+                </div>
+
+                <a href="./produtos.html" class="voltar-loja">← Continuar comprando</a>
+            </section>
+        </div>
+    </main>
+
+    <!-- MODAL DE LOGIN E CADASTRO -->
+    <div id="modal-auth" class="modal-container" role="dialog" aria-modal="true" aria-labelledby="titulo-modal">
+        <div class="modal-conteudo">
+            <button type="button" class="fechar-modal" id="fechar-modal" aria-label="Fechar modal">&times;</button>
+            <div class="modal-abas">
+                <button type="button" class="aba-botao ativa" id="aba-login">Entrar</button>
+                <button type="button" class="aba-botao" id="aba-cadastro">Cadastrar</button>
+            </div>
+            
+            <form id="form-login" class="form-auth ativa">
+                <h3 id="titulo-modal">Acesse sua conta</h3>
+                <div class="grupo-input">
+                    <label for="login-email">E-mail</label>
+                    <input type="email" id="login-email" required placeholder="seu@email.com" autocomplete="email">
+                </div>
+                <div class="grupo-input">
+                    <label for="login-senha">Senha</label>
+                    <input type="password" id="login-senha" required placeholder="********" autocomplete="current-password">
+                </div>
+                <button type="submit" class="botao-submit">ENTRAR</button>
+            </form>
+
+            <form id="form-cadastro" class="form-auth">
+                <h3>Crie sua conta</h3>
+                <div class="grupo-input">
+                    <label for="cad-nome">Nome Completo</label>
+                    <input type="text" id="cad-nome" required placeholder="Seu nome" autocomplete="name">
+                </div>
+                <div class="grupo-input">
+                    <label for="cad-email">E-mail</label>
+                    <input type="email" id="cad-email" required placeholder="seu@email.com" autocomplete="email">
+                </div>
+                <div class="grupo-input">
+                    <label for="cad-senha">Senha</label>
+                    <input type="password" id="cad-senha" required placeholder="Mínimo 6 caracteres" minlength="6" autocomplete="new-password">
+                </div>
+                <button type="submit" class="botao-submit">CRIAR CONTA</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- GAVETA LATERAL DO CARRINHO -->
+    <div id="carrinho-modal" class="carrinho-drawer" role="dialog" aria-modal="true" aria-label="Carrinho de Compras">
+        <div class="carrinho-conteudo">
+            <div class="carrinho-cabecalho">
+                <h3>Seu Carrinho</h3>
+                <button type="button" id="fechar-carrinho" aria-label="Fechar carrinho">&times;</button>
+            </div>
+            <div id="itens-carrinho" class="carrinho-itens"></div>
+            <div class="carrinho-rodape">
+                <p>Total: <strong>R$ <span id="total-carrinho">0,00</span></strong></p>
+                <a href="finalizarcompra.html" id="botao-finalizar-compra" class="botao-finalizar">Finalizar Compra</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- RODAPÉ DA PÁGINA -->
+    <footer>
+        <div class="footer-marca">
+            <img src="./imagens/logopng.png" alt="Logo The King's Son">
+            <h3>The King's Son</h3>
+        </div>
+        <p>Vista sua fé. Viva seu propósito.</p>
+        <p class="copyright">© 2026 The King's Son - Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- BOTÃO VOLTAR AO TOPO -->
+    <a href="#topo" class="voltar-topo" aria-label="Voltar ao topo da página" title="Voltar ao topo">↑</a>
+
+    <!-- SCRIPTS EXTERNOS -->
+    <script type="text/javascript" src="script.js"></script>
+</body>
+</html>
