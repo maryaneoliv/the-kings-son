@@ -1926,3 +1926,77 @@ ul li::marker{
         grid-template-columns: 1fr;
     }
 }
+/* ==========================================
+   AJUSTES RESPONSIVOS ESPECÍFICOS PARA PRODUTOS E DEMAIS PÁGINAS
+   ========================================== */
+
+@media (max-width: 768px) {
+    /* --- ESTRUTURA GERAL DA PÁGINA DE PRODUTOS --- */
+    .produtos {
+        padding: 20px 3%;
+    }
+
+    .produtos-container {
+        flex-direction: column;
+        width: 100%;
+        gap: 20px;
+    }
+
+    /* --- PAINEL DE FILTROS --- */
+    .painel-filtros {
+        width: 100%;
+        flex: 1 1 100%;
+    }
+
+    /* --- WRAPPER DO CATÁLOGO E GRADE DE PRODUTOS --- */
+    .catalogo-wrapper {
+        width: 100%;
+        flex: 1 1 100%;
+    }
+
+    .lista-produtos {
+        /* Exibe os cards de produtos ajustados para o tamanho da tela do celular */
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 12px;
+    }
+
+    /* --- CARDS DOS PRODUTOS --- */
+    .produto {
+        padding: 10px;
+    }
+
+    .produto-imagem {
+        height: 140px;
+        margin-bottom: 8px;
+    }
+
+    .produto h3 {
+        font-size: 0.9rem;
+    }
+
+    .produto p {
+        font-size: 0.75rem;
+    }
+
+    .produto strong {
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+    }
+
+    .botao-comprar {
+        font-size: 0.8rem;
+        padding: 8px 4px;
+    }
+
+    /* --- CONTROLES DE PAGINAÇÃO --- */
+    .paginacao {
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-top: 20px;
+    }
+
+    .paginacao button {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+}
