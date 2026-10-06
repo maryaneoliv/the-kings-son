@@ -1,0 +1,18 @@
+/* Seleciona cada cartão de manifesto individual */
+.card-manifesto{
+    /* Define a cor de fundo do cartão */
+    background-color: #1e1e1e;
+    /* Define o espaçamento interno do cartão */
+    padding: 25px;
+    /* Arredonda as bordas do cartão */
+    border-radius: 6px;
+    /* Aplica uma linha de borda ao redor do cartão */
+    border: 1px solid #2a2a2a;
+    /* Controla o crescimento, encolhimento e largura base do elemento */
+    flex: 1 1 200px;
+}
+/* Seleciona o cartão com estilo diferenciado */
+.card-manifesto.destaque-street {
+    /* Altera a cor da borda do cartão em destaque */
+    border-color: #d4af37;
+}

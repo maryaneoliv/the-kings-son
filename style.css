@@ -1,0 +1,1897 @@
+/* ============== CONFIGURAÇÕES GERAIS ============== */
+/* Seleciona todos os elementos para reset de espaçamentos */
+*{
+    /* Remove a margem externa padrão do navegador */
+    margin: 0;
+    /* Remove o espaçamento interno padrão do navegador */
+    padding: 0;
+    /* Inclui bordas e preenchimentos no cálculo do tamanho total do elemento */
+    box-sizing: border-box;
+}
+/* Seleciona o elemento raiz da página */
+html{
+    /* Habilita a rolagem suave ao clicar em links internos */
+    scroll-behavior: smooth;
+}
+/* Seleciona o corpo principal da página */
+body{
+    /* Define a cor de fundo */
+    background-color: #0a0a0a;
+    /* Define a cor do texto padrão */
+    color: #f0f0f0;
+    /* Define a família de fontes da página */
+    font-family: Arial, sans-serif;
+    /* Define o espaçamento entre as linhas de texto */
+    line-height: 1.6;
+}
+/* Seleciona o container do cabeçalho */
+header{
+    /* Habilita o layout flexível */
+    display: flex;
+    /* Distribui os elementos com espaço entre eles */
+    justify-content: space-between;
+    /* Centraliza os elementos verticalmente */
+    align-items: center;
+    /* Define o espaçamento interno vertical e lateral */
+    padding: 20px 5%;
+    /* Define a cor de fundo do cabeçalho */
+    background-color: #141414;
+    /* Mantém o cabeçalho fixo durante a rolagem */
+    position: sticky;
+    /* Alinha o cabeçalho no topo da janela */
+    top: 0;
+    /* Define a sobreposição em relação aos outros elementos */
+    z-index: 1000;
+    /* Adiciona uma linha de borda na parte inferior */
+    border-bottom: 1px solid #2a2a2a;
+}
+/* Seleciona a caixa da marca e logo */
+.logo{
+    /* Habilita o layout flexível */
+    display: flex;
+    /* Centraliza imagem e texto verticalmente */
+    align-items: center;
+    /* Define a distância entre a imagem e o título */
+    gap: 8px;
+}
+/* Seleciona a imagem do logotipo */
+.logo img{
+    /* Define a altura fixa da imagem */
+    height: 45px;
+    /* Ajusta a largura proporcionalmente */
+    width: auto;
+}
+/* Seleciona o título do logotipo */
+.logo h1{
+    /* Define o tamanho da fonte do título */
+    font-size: 1.3rem;
+    /* Define a cor do texto do título */
+    color: #ffffff;
+}
+/* Seleciona a barra de navegação */
+nav{
+    /* Habilita o layout flexível para os links */
+    display: flex;
+    /* Centraliza os links verticalmente */
+    align-items: center;
+    /* Define o espaçamento entre os links */
+    gap: 14px;
+}
+/* Seleciona os links do menu */
+nav a{
+    /* Define a cor do texto dos links */
+    color: #a0a0a0;
+    /* Remove o sublinhado padrão do link */
+    text-decoration: none;
+    /* Deixa o texto do link em negrito */
+    font-weight: bold;
+    /* Define o tamanho da fonte */
+    font-size: 0.9rem;
+    /* Define transição suave para mudança de cor */
+    transition: color 0.3s;
+}
+/* Seleciona a interação ao passar o mouse sobre o link */
+nav a:hover{
+    /* Altera a cor do texto no estado de sobreposição */
+    color: #d4af37;
+}
+/* Seleciona o botão de entrada no menu */
+.botao-entrar{
+    /* Define o fundo transparente */
+    background-color: transparent;
+    /* Define a cor do texto do botão */
+    color: #d4af37;
+    /* Aplica a borda ao redor do botão */
+    border: 2px solid #d4af37;
+    /* Define o espaçamento interno superior/inferior e lateral */
+    padding: 8px 4px;
+    /* Aplica negrito ao texto do botão */
+    font-weight: bold;
+    /* Altera o cursor para o formato de ponteiro */
+    cursor: pointer;
+    /* Arredonda os cantos da borda */
+    border-radius: 4px;
+    /* Define a transição suave de cor de fundo e texto */
+    transition: background-color 0.3s, color 0.3s;
+}
+/* Seleciona a interação ao passar o mouse sobre o botão de entrar */
+.botao-entrar:hover{
+    /* Altera a cor de fundo no estado de sobreposição */
+    background-color: #d4af37;
+    /* Inverte a cor do texto no estado de sobreposição */
+    color: #0a0a0a;
+}
+/* Seleciona a camada escurecida de fundo do modal */
+.modal-container{
+    /* Oculta o modal da tela por padrão */
+    display: none;
+    /* Fixa a posição do modal em relação à viewport */
+    position: fixed;
+    /* Alinha no limite superior */
+    top: 0;
+    /* Alinha no limite esquerdo */
+    left: 0;
+    /* Ocupa toda a largura da tela */
+    width: 100%;
+    /* Ocupa toda a altura da tela */
+    height: 100%;
+    /* Aplica a cor de fundo semi-transparente */
+    background-color: rgba(0, 0, 0, 0.8);
+    /* Mantém o elemento acima dos demais componentes */
+    z-index: 2000;
+    /* Centraliza a caixa de conteúdo verticalmente */
+    align-items: center;
+    /* Centraliza a caixa de conteúdo horizontalmente */
+    justify-content: center;
+}
+/* Exibe e centraliza o modal APENAS quando tiver a classe 'ativo' */
+.modal-container.ativo{
+    display: flex;
+}
+/* Seleciona o painel central do modal */
+.modal-conteudo{
+    /* Define a cor de fundo da caixa */
+    background-color: #1e1e1e;
+    /* Define a largura relativa inicial */
+    width: 90%;
+    /* Limita a largura máxima da caixa */
+    max-width: 400px;
+    /* Aplica espaçamento interno */
+    padding: 30px;
+    /* Arredonda as pontas do modal */
+    border-radius: 8px;
+    /* Aplica a borda ao redor do painel */
+    border: 1px solid #d4af37;
+    /* Permite o posicionamento absoluto do botão fechar */
+    position: relative;
+}
+/* Seleciona o botão de fechar o modal */
+.fechar-modal{
+    /* Posiciona o botão em relação ao painel pai */
+    position: absolute;
+    /* Define a distância do topo */
+    top: 10px;
+    /* Define a distância da direita */
+    right: 15px;
+    /* Define o tamanho da fonte do ícone */
+    font-size: 1.5rem;
+    /* Define a cor do ícone */
+    color: #a0a0a0;
+    /* Altera o cursor para o formato de ponteiro */
+    cursor: pointer;
+    /* Remove o fundo do botão */
+    background: none;
+    /* Remove a borda padrão do botão */
+    border: none;
+    /* Transição para alteração de cor suave */
+    transition: color 0.3s;
+}
+/* Seleciona a interação hover no botão fechar */
+.fechar-modal:hover{
+    /* Altera a cor do ícone ao passar o mouse */
+    color: #d4af37;
+}
+/* Seleciona o container das abas de troca de formulário */
+.modal-abas{
+    /* Habilita o layout flexível */
+    display: flex;
+    /* Adiciona margem na parte inferior */
+    margin-bottom: 20px;
+    /* Adiciona uma linha divisória inferior */
+    border-bottom: 1px solid #2a2a2a;
+}
+/* Seleciona os botões das abas */
+.aba-botao{
+    /* Divide o espaço igualmente entre as abas */
+    flex: 1;
+    /* Remove o fundo padrão do botão */
+    background: none;
+    /* Remove as bordas padrão */
+    border: none;
+    /* Define a cor do texto da aba */
+    color: #a0a0a0;
+    /* Aplica o espaçamento interno */
+    padding: 10px;
+    /* Define o tamanho da fonte */
+    font-size: 1rem;
+    /* Aplica negrito ao texto */
+    font-weight: bold;
+    /* Altera o cursor para o formato de ponteiro */
+    cursor: pointer;
+    /* Transição suave de cores nas abas */
+    transition: color 0.3s, border-bottom 0.3s;
+}
+/* Seleciona a aba que está atualmente ativa */
+.aba-botao.ativa{
+    /* Altera a cor do texto da aba ativa */
+    color: #d4af37;
+    /* Destaca a parte inferior da aba ativa com uma borda */
+    border-bottom: 2px solid #d4af37;
+}
+/* Seleciona a estrutura do formulário */
+.form-auth{
+    /* Esconde o formulário inativo */
+    display: none;
+    /* Organiza os campos em formato de coluna */
+    flex-direction: column;
+    /* Define o espaçamento entre os campos */
+    gap: 15px;
+}
+/* Seleciona o formulário que está ativo */
+.form-auth.ativa{
+    /* Exibe o formulário ativo no formato flexível */
+    display: flex;
+}
+/* Seleciona o título interno do formulário */
+.form-auth h3{
+    /* Centraliza o texto do título */
+    text-align: center;
+    /* Adiciona espaçamento inferior */
+    margin-bottom: 5px;
+}
+/* Seleciona o grupo contendo rótulo e campo de entrada */
+.grupo-input{
+    /* Habilita o layout flexível */
+    display: flex;
+    /* Organiza rótulo e campo em coluna */
+    flex-direction: column;
+    /* Define a distância entre o rótulo e o campo */
+    gap: 5px;
+}
+/* Seleciona os rótulos de texto dos campos */
+.grupo-input label{
+    /* Define o tamanho da fonte do rótulo */
+    font-size: 0.85rem;
+    /* Define a cor do rótulo */
+    color: #a0a0a0;
+}
+/* Seleciona as caixas de digitação */
+.grupo-input input{
+    /* Define a cor de fundo do campo */
+    background-color: #141414;
+    /* Aplica uma borda fina ao redor do campo */
+    border: 1px solid #2a2a2a;
+    /* Define o espaçamento interno */
+    padding: 10px;
+    /* Arredonda os cantos da caixa */
+    border-radius: 4px;
+    /* Define a cor do texto digitado */
+    color: #ffffff;
+    /* Define o tamanho da fonte do texto */
+    font-size: 1rem;
+    /* Transição suave ao focar no campo */
+    transition: border-color 0.3s;
+}
+/* Seleciona o estado de foco durante a digitação */
+.grupo-input input:focus{
+    /* Altera a cor da borda quando selecionado */
+    border-color: #d4af37;
+    /* Remove o contorno padrão do navegador */
+    outline: none;
+}
+/* Seleciona os botões de envio dos formulários */
+.botao-submit{
+    /* Define a cor de fundo do botão */
+    background-color: #d4af37;
+    /* Define a cor do texto */
+    color: #0a0a0a;
+    /* Remove as bordas padrão */
+    border: none;
+    /* Define o espaçamento interno */
+    padding: 12px;
+    /* Aplica negrito ao texto */
+    font-weight: bold;
+    /* Arredonda os cantos do botão */
+    border-radius: 4px;
+    /* Altera o cursor para o formato de ponteiro */
+    cursor: pointer;
+    /* Adiciona margem acima do botão */
+    margin-top: 10px;
+    /* Transição para mudança de cor de fundo */
+    transition: background-color 0.3s;
+}
+/* Seleciona a interação ao passar o mouse sobre o botão de envio */
+.botao-submit:hover{
+    /* Altera a cor de fundo na sobreposição */
+    background-color: #f3c623;
+}
+/* Seleciona o container do rodapé */
+footer{
+    /* Centraliza o texto */
+    text-align: center;
+    /* Define o espaçamento interno */
+    padding: 40px 20px;
+    /* Define a cor de fundo do rodapé */
+    background-color: #141414;
+    /* Adiciona uma linha divisória no topo */
+    border-top: 1px solid #2a2a2a;
+}
+/* Seleciona o container do logotipo no rodapé */
+.footer-marca{
+    /* Habilita o layout flexível */
+    display: flex;
+    /* Centraliza os elementos no eixo horizontal */
+    justify-content: center;
+    /* Centraliza os elementos no eixo vertical */
+    align-items: center;
+    /* Define a distância entre a imagem e o título */
+    gap: 10px;
+    /* Adiciona margem na parte inferior */
+    margin-bottom: 10px;
+}
+/* Seleciona a imagem do rodapé */
+footer img{
+    /* Define a largura fixa da imagem do rodapé */
+    width: 45px;
+    /* Ajusta a altura de forma automática */
+    height: auto;
+}
+/* Seleciona o título do rodapé */
+footer h3{
+    /* Define o tamanho da fonte */
+    font-size: 1.3rem;
+    /* Remove a margem inferior para o alinhamento flex */
+    margin-bottom: 0;
+}
+/* Seleciona o texto explicativo do rodapé */
+footer p{
+    /* Define a cor do texto */
+    color: #a0a0a0;
+    /* Define o tamanho da fonte */
+    font-size: 0.9rem;
+}
+/* Seleciona a nota de direitos autorais */
+footer .copyright{
+    /* Adiciona margem acima do texto */
+    margin-top: 10px;
+    /* Define um tamanho menor para a fonte */
+    font-size: 0.75rem;
+}
+/* Seleciona o botão fixo de navegação para o topo */
+.voltar-topo{
+    /* Fixa o elemento em relação à janela do navegador */
+    position: fixed;
+    /* Define a distância em relação à borda inferior */
+    bottom: 20px;
+    /* Define a distância em relação à borda direita */
+    right: 20px;
+    /* Define a cor de fundo do botão */
+    background-color: #1e1e1e;
+    /* Define a cor da seta */
+    color: #d4af37;
+    /* Aplica a borda ao botão */
+    border: 1px solid #d4af37;
+    /* Define a largura do botão */
+    width: 40px;
+    /* Define a altura do botão */
+    height: 40px;
+    /* Habilita o layout flexível */
+    display: flex;
+    /* Centraliza a seta horizontalmente */
+    align-items: center;
+    /* Centraliza a seta verticalmente */
+    justify-content: center;
+    /* Remove o sublinhado do link */
+    text-decoration: none;
+    /* Transforma a estrutura do botão em um círculo */
+    border-radius: 50%;
+    /* Define o peso em negrito para a seta */
+    font-weight: bold;
+    /* Define a velocidade da animação de movimento */
+    transition: transform 0.3s, background-color 0.3s, color 0.3s;
+}
+/* Seleciona a interação ao passar o mouse sobre o botão voltar ao topo */
+.voltar-topo:hover{
+    /* Inverte a cor de fundo no estado de sobreposição */
+    background-color: #d4af37;
+    /* Inverte a cor da seta no estado de sobreposição */
+    color: #0a0a0a;
+    /* Eleva o botão ligeiramente para cima */
+    transform: translateY(-4px);
+}
+/* Define o container do botão e cria um contexto de posicionamento relativo */
+.botao-carrinho, .botao-pedidos{
+    /* Define o contexto de posicionamento relativo para o contador filho */
+    position: relative;
+    /* Ativa o layout flexbox para alinhar os elementos */
+    display: inline-flex;
+    /* Centraliza o ícone verticalmente dentro do botão */
+    align-items: center;
+    /* Centraliza o ícone horizontalmente dentro do botão */
+    justify-content: center;
+    /* Define a largura do botão */
+    width: 44px;
+    /* Define a altura do botão */
+    height: 35px;
+    /* Remove a cor de fundo padrão do botão */
+    background: transparent;
+    /* Aplica a borda ao redor do botão */
+    border: 2px solid #d4af37;
+    /* Arredonda as pontas do botão no formato de cápsula */
+    border-radius: 4px;
+    /* Altera o cursor para o ícone de clique */
+    cursor: pointer;
+    /* Garante que nenhum elemento ultrapasse visualmente os limites da borda */
+    overflow: hidden;
+}
+/* Contador de itens do carrinho */
+#contador-carrinho{
+    /* Ativa o posicionamento absoluto relativo ao container .botao-carrinho */
+    position: absolute;
+    /* Posiciona o contador rente ao topo interno da borda */
+    top: 2px;
+    /* Posiciona o contador rente à lateral direita interna da borda */
+    right: 2px;
+    /* Ativa o flexbox interno para centralizar o texto no círculo */
+    display: flex;
+    /* Centraliza o número verticalmente dentro da bolinha */
+    align-items: center;
+    /* Centraliza o número horizontalmente dentro da bolinha */
+    justify-content: center;
+    /* Define a largura da bolinha do contador */
+    width: 14px;
+    /* Define a altura da bolinha do contador */
+    height: 14px;
+    /* Define a cor de fundo da bolinha do contador */
+    background-color: #d4af37;
+    /* Define a cor do texto do número */
+    color: #0a0a0a;
+    /* Define o tamanho da fonte do número do contador */
+    font-size: 11px;
+    /* Aplica peso em negrito para dar destaque ao número */
+    font-weight: bold;
+    /* Transforma o enquadramento em uma bolinha perfeitamente circular */
+    border-radius: 50%;
+    /* Elimina espaços vazios acima e abaixo do número */
+    line-height: 1;
+}
+/* Controla as dimensões e a exibição da imagem dentro do botão */
+.icone-carrinho-img, .icone-pedidos-img{
+    /* Define a largura da imagem */
+    width: 26px;
+    /* Define a altura da imagem */
+    height: 26px;
+    /* Ajusta a imagem dentro do container mantendo as proporções sem distorcer */
+    object-fit: contain;
+    /* Converte a imagem em um bloco para remover espaçamentos extras de elementos em linha */
+    display: block;
+    /* Configura a animação suave para alterações na propriedade de transformação */
+    transition: transform 0.2s ease;
+}
+/* Aplica efeito visual na imagem quando o usuário passa o ponteiro sobre o botão */
+.botao-carrinho:hover .icone-carrinho-img{
+    /* Aumenta a escala da imagem ligeiramente para criar um efeito de zoom */
+    transform: scale(1.08);
+}
+/* Estrutura principal do painel lateral do carrinho */
+.carrinho-drawer{
+    /* Fixa o elemento em relação à janela de visualização do navegador */
+    position: fixed;
+    /* Alinha o topo da gaveta ao topo da tela */
+    top: 0;
+    /* Esconde o painel totalmente fora da tela pelo lado direito */
+    right: -100%;
+    /* Define a largura inicial ocupando toda a tela em telas pequenas */
+    width: 100%;
+    /* Limita a largura máxima a 380 pixels em telas maiores */
+    max-width: 380px;
+    /* Ocupa 100% da altura total da janela visual */
+    height: 100%;
+    /* Define a cor de fundo */
+    background-color: #141414;
+    /* Adiciona uma borda fina na esquerda para separar do resto da página */
+    border-left: 1px solid #2a2a2a;
+    /* Aplica uma sombra projetada para a esquerda criando profundidade */
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+    /* Garante que o carrinho fique sobreposto a todos os outros elementos */
+    z-index: 1000;
+    /* Transiciona a posição 'right' suavemente em 0,3 segundos */
+    transition: right 0.3s ease;
+}
+/* Estado da gaveta quando recebe a classe .ativo via JavaScript */
+.carrinho-drawer.ativo{
+    /* Move o painel para a borda direita da tela, tornando-o visível */
+    right: 0;
+}
+/* Container interno que organiza o conteúdo do carrinho */
+.carrinho-conteudo{
+    /* Ativa o modo de layout Flexbox */
+    display: flex;
+    /* Empilha os elementos internos verticalmente (uma coluna) */
+    flex-direction: column;
+    /* Faz o container interno ocupar toda a altura da gaveta */
+    height: 100%;
+    /* Adiciona um espaçamento interno de 20 pixels nas bordas */
+    padding: 20px;
+}
+/* Cabeçalho com o título e botão de fechar */
+.carrinho-cabecalho{
+    /* Ativa o modo de layout Flexbox no cabeçalho */
+    display: flex;
+    /* Distribui o título e o botão nas extremidades opostas */
+    justify-content: space-between;
+    /* Alinha o título e o botão verticalmente ao centro */
+    align-items: center;
+    /* Adiciona uma linha divisória na parte inferior */
+    border-bottom: 1px solid #2a2a2a;
+    /* Espaçamento interno entre os elementos e a linha inferior */
+    padding-bottom: 15px;
+}
+/* Estilização do título h3 dentro do cabeçalho */
+.carrinho-cabecalho h3{
+    /* Define a cor do texto */
+    color: #d4af37;
+    /* Remove as margens padrão do elemento h3 */
+    margin: 0;
+}
+/* Botão de fechar a gaveta (X) */
+#fechar-carrinho{
+    /* Remove qualquer fundo padrão do botão */
+    background: none;
+    /* Remove as bordas padrão do botão */
+    border: none;
+    /* Define a cor do texto/ícone do botão como branco */
+    color: #fff;
+    /* Aumenta o tamanho da fonte do botão (24px) */
+    font-size: 1.5rem;
+    /* Muda o ponteiro do mouse para o ícone de 'mãozinha' ao passar por cima */
+    cursor: pointer;
+    /* Transiciona a alteração de cor suavemente */
+    transition: color 0.2s ease;
+}
+/* Alteração de cor ao passar o mouse no botão fechar */
+#fechar-carrinho:hover{
+    /* Muda a cor do 'X' */
+    color: #d4af37;
+}
+/* Área rolável que lista os produtos adicionados */
+.carrinho-itens{
+    /* Faz este container expandir para ocupar todo o espaço vertical disponível */
+    flex: 1;
+    /* Adiciona barra de rolagem vertical caso o conteúdo ultrapasse a altura */
+    overflow-y: auto;
+    /* Adiciona uma margem de 20 pixels nas partes superior e inferior */
+    margin: 20px 0;
+}
+/* Card individual para cada item dentro da lista do carrinho */
+.item-carrinho{
+    /* Ativa Flexbox para alinhar imagem, textos e botão lado a lado */
+    display: flex;
+    /* Alinha todos os elementos do item verticalmente ao centro */
+    align-items: center;
+    /* Cria um espaço de 15 pixels entre cada elemento filho */
+    gap: 15px;
+    /* Adiciona espaço na parte inferior em relação ao próximo item */
+    margin-bottom: 15px;
+    /* Espaçamento interno antes da linha divisória */
+    padding-bottom: 15px;
+    /* Linha divisória inferior entre os itens */
+    border-bottom: 1px solid #2a2a2a;
+}
+/* Miniatura da imagem do produto no carrinho */
+.item-carrinho img{
+    /* Define a largura fixa da imagem para 60 pixels */
+    width: 60px;
+    /* Define a altura fixa da imagem para 60 pixels */
+    height: 60px;
+    /* Ajusta a imagem sem distorcer, cortando os excessos se necessário */
+    object-fit: cover;
+    /* Arredonda levemente os cantos da imagem em 4 pixels */
+    border-radius: 4px;
+}
+/* Container de informações do produto (nome, preço e quantidade) */
+.detalhes-item{
+    /* Permite que o texto ocupe todo o espaço central restante */
+    flex: 1;
+}
+/* Título do produto individual */
+.detalhes-item h4{
+    /* Define um tamanho de fonte ligeiramente menor (aproximadamente 14.4px) */
+    font-size: 0.9rem;
+    /* Adiciona uma margem inferior de 4 pixels */
+    margin-bottom: 4px;
+}
+/* Agrupador dos botões e do contador de quantidade */
+.controles-qtd{
+    /* Ativa Flexbox para alinhar os botões e a quantidade em linha */
+    display: flex;
+    /* Alinha verticalmente ao centro os botões e o número da quantidade */
+    align-items: center;
+    /* Espaçamento de 8 pixels entre os botões + e - e a quantidade */
+    gap: 8px;
+    /* Distância superior em relação ao preço do produto */
+    margin-top: 5px;
+}
+/* Botões para somar (+) ou subtrair (-) a quantidade */
+.controles-qtd button{
+    /* Define a cor de fundo do botão */
+    background-color: #2a2a2a;
+    /* Remove a borda padrão do botão */
+    border: none;
+    /* Define a cor do sinal do botão como branco */
+    color: #fff;
+    /* Define a largura fixa em 24 pixels */
+    width: 24px;
+    /* Define a altura fixa em 24 pixels */
+    height: 24px;
+    /* Arredonda os cantos dos botões em 4 pixels */
+    border-radius: 4px;
+    /* Transforma o ponteiro em 'mãozinha' ao passar sobre os botões */
+    cursor: pointer;
+    /* Transiciona a cor de fundo de forma suave */
+    transition: background-color 0.2s ease;
+}
+/* Efeito hover nos botões de controle de quantidade */
+.controles-qtd button:hover{
+    /* Altera o fundo do botão */
+    background-color: #d4af37;
+    /* Altera a cor do símbolo */
+    color: #141414;
+}
+/* Botão do ícone 'X' para remover o item inteiro do carrinho */
+.remover-item{
+    /* Remove o fundo padrão do botão */
+    background: none;
+    /* Remove a borda padrão do botão */
+    border: none;
+    /* Define a cor do ícone como um tom de vermelho para alerta */
+    color: #ff6b6b;
+    /* Ajusta o tamanho do ícone de exclusão */
+    font-size: 1.2rem;
+    /* Transforma o ponteiro em 'mãozinha' ao passar por cima */
+    cursor: pointer;
+    /* Transiciona a opacidade suavemente ao passar o cursor */
+    transition: opacity 0.2s ease;
+}
+/* Efeito ao passar o mouse no botão de remoção */
+.remover-item:hover{
+    /* Torna o ícone levemente mais transparente no hover */
+    opacity: 0.7;
+}
+/* Rodapé fixado na base do carrinho (com preço total e botão de finalizar) */
+.carrinho-rodape{
+    /* Linha divisória superior separando da lista de itens */
+    border-top: 1px solid #2a2a2a;
+    /* Espaçamento interno na parte superior do rodapé */
+    padding-top: 15px;
+}
+/* Mensagem exibida quando não houver itens no carrinho */
+.carrinho-vazio{
+    /* Define a cor do texto */
+    color: #a0a0a0;
+    /* Centraliza o texto no meio do container */
+    text-align: center;
+    /* Desloca a mensagem 40 pixels para baixo em relação ao topo */
+    margin-top: 40px;
+}
+/* Estilização do link de finalizar compra como botão de destaque */
+.botao-finalizar{
+    /* Ativa o modelo flexbox para centralizar o texto interno */
+    display: flex;
+    /* Centraliza o texto verticalmente dentro do botão */
+    align-items: center;
+    /* Centraliza o texto horizontalmente dentro do botão */
+    justify-content: center;
+    /* Garante que o botão ocupe 100% da largura do modal do carrinho */
+    width: 100%;
+    /* Define a altura fixa do botão de ação */
+    height: 48px;
+    /* Define o espaçamento interno do botão */
+    padding: 0 16px;
+    /* Define a cor de fundo */
+    background-color: #d4af37;
+    /* Define a cor do texto para contraste com o fundo */
+    color: #0a0a0a;
+    /* Define o tamanho da fonte do texto */
+    font-size: 16px;
+    /* Aplica o peso em negrito para destacar o texto */
+    font-weight: bold;
+    /* Remove o sublinhado padrão dos links de navegação */
+    text-decoration: none;
+    /* Arredonda os cantos da borda do botão */
+    border-radius: 8px;
+    /* Remove bordas do navegador */
+    border: none;
+    /* Altera o cursor do mouse para a mãozinha de clique */
+    cursor: pointer;
+    /* Suaviza a transição de cores e efeitos ao passar o mouse */
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+/* Efeito ao passar o ponteiro do mouse sobre o botão de finalizar */
+.botao-finalizar:hover{
+    /* Ajusta levemente a tonalidade da cor de fundo no hover */
+    background-color: #c5a028;
+    /* Aplica uma leve elevação na escala do botão */
+    transform: translateY(-2px);
+}
+
+
+
+/* ============== ESPECÍFICO DE INDEX ============== */
+/* Seleciona a seção do banner de destaque */
+.banner{
+    /* Define o espaçamento interno vertical e lateral */
+    padding: 100px 20px;
+    /* Centraliza todo o texto da seção */
+    text-align: center;
+    /* Define a cor de fundo do banner */
+    background-color: #141414;
+    /* Adiciona uma linha divisória no topo */
+    border-bottom: 1px solid #2a2a2a;
+}
+/* Seleciona a frase de destaque superior no banner */
+.banner-texto .frase{
+    /* Define o tamanho da fonte */
+    font-size: 0.9rem;
+    /* Define a cor de destaque do texto */
+    color: #d4af37;
+    /* Define o peso da fonte como negrito */
+    font-weight: bold;
+    /* Adiciona espaçamento na parte inferior */
+    margin-bottom: 10px;
+}
+/* Seleciona o título principal do banner */
+.banner-texto h2{
+    /* Define o tamanho da fonte do título */
+    font-size: 3rem;
+    /* Adiciona espaçamento abaixo do título */
+    margin-bottom: 10px;
+}
+/* Seleciona o parágrafo descritivo do banner */
+.banner-texto p{
+    /* Define o tamanho da fonte */
+    font-size: 1.1rem;
+    /* Define a cor do texto secundário */
+    color: #a0a0a0;
+    /* Adiciona margem na parte inferior */
+    margin-bottom: 30px;
+}
+/* Seleciona os botões chamativos da aplicação */
+.botao{
+    /* Permite aplicar dimensões e espaçamentos no elemento em linha */
+    display: inline-block;
+    /* Define a cor de fundo do botão */
+    background-color: #d4af37;
+    /* Define a cor do texto */
+    color: #0a0a0a;
+    /* Aplica o espaçamento interno vertical e lateral */
+    padding: 12px 28px;
+    /* Define a fonte em negrito */
+    font-weight: bold;
+    /* Remove o sublinhado do link */
+    text-decoration: none;
+    /* Arredonda as pontas da borda */
+    border-radius: 4px;
+    /* Define a transição suave para efeitos de transformação */
+    transition: transform 0.3s, background-color 0.3s;
+}
+/* Seleciona a interação ao passar o mouse sobre o botão */
+.botao:hover{
+    /* Altera a cor de fundo na sobreposição */
+    background-color: #f3c623;
+    /* Desloca o botão ligeiramente para cima */
+    transform: translateY(-3px);
+}
+/* Seleciona a seção externa intermediária da página */
+.faixa-intro{
+    /* Define o espaçamento interno superior/inferior e lateral da faixa */
+    padding: 80px 20px;
+    /* Ativa o layout flexível na seção externa */
+    display: flex;
+    /* Centraliza o container filho horizontalmente na tela */
+    justify-content: center;
+    /* Define a imagem de fundo */
+    background-image: url(./imagens/logopng.png);
+    /* Evita que a imagem de fundo se repita se for menor que a seção */
+    background-repeat: no-repeat;
+    /* Centraliza a imagem na seção */
+    background-position: center;
+    /* Reduz e ajusta a imagem para que ela apareça 100% inteira na tela sem cortes */
+    background-size: contain;
+    /* Define uma cor de fundo reserva para preencher os lados caso a imagem seja menor */
+    background-color: #1e1e1e;
+    /* Adiciona uma linha divisória no topo */
+    border-bottom: 1px solid #2a2a2a;
+}
+/* Seleciona o cartão de apresentação que fica sobreposto à faixa de fundo */
+.intro{
+    /* Define o limite máximo de largura do cartão */
+    max-width: 800px;
+    /* Define a cor de fundo do cartão interno para contrastar com a imagem de fundo */
+    background-color: rgba(255, 255, 255, 0.70);
+    /* Adiciona espaçamento interno em todas as direções do cartão */
+    padding: 50px 40px;
+    /* Define o grau de arredondamento dos cantos do cartão */
+    border-radius: 8px;
+    /* Centraliza o alinhamento dos textos contidos no cartão */
+    text-align: center;
+    /* Aplica uma sombra projetada suave ao redor do cartão */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    /* Cria uma faixa de borda decorativa sólida apenas no lado esquerdo do cartão */
+    border-left: 4px solid #d4af37;
+    /* Garante a cor escura dos textos internos para contraste com fundo claro */
+    color: #1a1a1a;
+}
+/* Seleciona o texto dentro da faixa introdutória */
+.intro p{
+    /* Define o tamanho da fonte */
+    font-size: 1.1rem;
+    /* Aplica o estilo itálico ao texto */
+    font-style: italic;
+    /* Limita a largura máxima do bloco de texto */
+    max-width: 800px;
+    /* Centraliza o bloco horizontalmente */
+    margin: 0 auto;
+}
+
+
+
+/* ============== ESPECÍFICO DE PRODUTOS ============== */
+/* Seleciona o bloco container de produtos */
+.produtos{
+    /* Aplica o espaçamento em relação aos limites da tela */
+    padding: 40px 5%;
+    /* Define a compensação para rolagem considerando o cabeçalho fixo */
+    scroll-margin-top: 80px;
+}
+/* Seleciona o título da coleção de produtos */
+.produtos h2{
+    /* Centraliza o texto do título */
+    text-align: center;
+    /* Define o tamanho da fonte */
+    font-size: 2rem;
+    /* Define a margem na base do título */
+    margin-bottom: 5px;
+}
+/* Seleciona o parágrafo explicativo da seção */
+.subtitulo{
+    /* Centraliza o texto */
+    text-align: center;
+    /* Define a cor suave para leitura */
+    color: #a0a0a0;
+    /* Aplica margem inferior grande antes do catálogo */
+    margin-bottom: 35px;
+}
+/* Seleciona a estrutura flexível com filtros e catálogo */
+.produtos-container{
+    /* Habilita a visualização flex */
+    display: flex;
+    /* Permite quebra de linha para adaptação mobile */
+    flex-wrap: wrap;
+    /* Espaçamento entre o painel lateral e a grade de produtos */
+    gap: 30px;
+    /* Alinha o topo dos elementos do painel e catálogo */
+    align-items: flex-start;
+}
+/* ESTILOS DO PAINEL DE FILTROS À ESQUERDA */
+/* Seleciona a caixa de filtros laterais */
+.painel-filtros{
+    /* Largura flexível com base de inicialização fixa */
+    flex: 1 1 240px;
+    /* Define a cor de fundo do painel */
+    background-color: #141414;
+    /* Aplica borda ao redor do painel lateral */
+    border: 1px solid #2a2a2a;
+    /* Arredonda os cantos da caixa */
+    border-radius: 8px;
+    /* Espaçamento interno de preenchimento */
+    padding: 20px;
+}
+/* Seleciona o título principal do painel de filtros */
+.painel-filtros h3{
+    /* Define o tamanho do título */
+    font-size: 1.2rem;
+    /* Define a cor para o cabeçalho */
+    color: #d4af37;
+    /* Adiciona uma borda na base do título */
+    border-bottom: 1px solid #2a2a2a;
+    /* Espaçamento interno na parte inferior */
+    padding-bottom: 10px;
+    /* Espaçamento externo na base do título */
+    margin-bottom: 15px;
+}
+/* Seleciona cada bloco de grupo de filtros */
+.grupo-filtro{
+    /* Espaçamento entre diferentes grupos de filtro */
+    margin-bottom: 20px;
+}
+/* Seleciona o rótulo de título de cada filtro */
+.grupo-filtro h4{
+    /* Define o tamanho da fonte */
+    font-size: 0.95rem;
+    /* Define a cor para texto claro */
+    color: #ffffff;
+    /* Espaçamento externo na base */
+    margin-bottom: 10px;
+}
+/* Seleciona as opções com caixas de marcação */
+.grupo-filtro label{
+    /* Exibe uma caixa por linha */
+    display: block;
+    /* Define o tamanho da fonte */
+    font-size: 0.88rem;
+    /* Define a cor secundária */
+    color: #a0a0a0;
+    /* Espaçamento entre os checkboxes */
+    margin-bottom: 6px;
+    /* Muda o cursor para mãozinha */
+    cursor: pointer;
+}
+/* Seleciona o cursor nos checkboxes */
+.grupo-filtro input[type="checkbox"]{
+    /* Adiciona respiro entre a caixa e o texto do rótulo */
+    margin-right: 8px;
+}
+/* Seleciona o input tipo barra de preço */
+.grupo-filtro input[type="range"]{
+    /* Expande a barra por toda a largura do grupo */
+    width: 100%;
+}
+/* Seleciona o botão de limpeza dos filtros */
+.botao-limpar{
+    /* Expande o botão na largura do painel */
+    width: 100%;
+    /* Define o preenchimento interno */
+    padding: 10px;
+    /* Define o fundo transparente */
+    background-color: transparent;
+    /* Cor do texto do botão */
+    color: #a0a0a0;
+    /* Borda do botão */
+    border: 1px solid #2a2a2a;
+    /* Cantos levemente arredondados */
+    border-radius: 4px;
+    /* Cursor no padrão de ação clicável */
+    cursor: pointer;
+    /* Transição suave do efeito hover */
+    transition: background-color 0.3s, color 0.3s;
+}
+/* Efeito ao passar o mouse sobre o botão de limpar */
+.botao-limpar:hover{
+    /* Altera o fundo do botão para vermelho sutil */
+    background-color: #2a1212;
+    /* Muda a cor do texto do botão para vermelho claro */
+    color: #ff6b6b;
+}
+/* ESTILOS DO CATÁLOGO DE PRODUTOS */
+/* Seleciona o invólucro do catálogo e paginação */
+.catalogo-wrapper{
+    /* Ocupa a maior fração de espaço da tela */
+    flex: 3 1 600px;
+}
+/* Seleciona a grade organizadora dos cartões de produtos */
+.lista-produtos{
+    /* Habilita o modelo de exibição em grade bidimensional */
+    display: grid;
+    /* Define 3 colunas de larguras iguais com responsividade dinâmica */
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    /* Define o espaçamento entre linhas e colunas de produtos */
+    gap: 20px;
+}
+/* Seleciona o cartão individual de produto */
+.produto{
+    /* Cor de fundo do cartão */
+    background-color: #141414;
+    /* Borda sutil de isolamento */
+    border: 1px solid #2a2a2a;
+    /* Arredondamento dos cantos */
+    border-radius: 8px;
+    /* Espaçamento interno no cartão */
+    padding: 15px;
+    /* Centraliza o texto dos cartões */
+    text-align: center;
+    /* Animação suave para efeito hover */
+    transition: border-color 0.3s, transform 0.3s;
+}
+/* Efeito de sobreposição do mouse no cartão de produto */
+.produto:hover{
+    /* Muda a cor da borda */
+    border-color: #d4af37;
+    /* Eleva o cartão levemente */
+    transform: translateY(-4px);
+}
+/* Seleciona o container da imagem do produto */
+.produto-imagem{
+    /* Define a largura total da área da imagem */
+    width: 100%;
+    /* Define a altura fixa da área da imagem */
+    height: 180px;
+    /* Define a cor de fundo neutra caso a imagem não carregue */
+    background-color: #1e1e1e;
+    /* Arredonda os cantos do bloco da imagem */
+    border-radius: 6px;
+    /* Previne o vazamento da imagem fora dos cantos */
+    overflow: hidden;
+    /* Margem na base da área visual */
+    margin-bottom: 12px;
+}
+/* Seleciona a imagem dentro do cartão do produto */
+.produto-imagem img{
+    /* Define a largura total para preencher o container */
+    width: 100%;
+    /* Define a altura total do bloco */
+    height: 100%;
+    /* Ajusta a imagem mantendo a proporção correta sem achatar */
+    object-fit: cover;
+}
+/* Seleciona o nome do produto */
+.produto h3{
+    /* Tamanho da fonte do nome */
+    font-size: 1.05rem;
+    /* Margem na base do título */
+    margin-bottom: 6px;
+}
+/* Seleciona o texto descritivo do produto */
+.produto p{
+    /* Tamanho da fonte descritiva */
+    font-size: 0.85rem;
+    /* Cor secundária para o texto */
+    color: #a0a0a0;
+    /* Margem inferior antes do preço */
+    margin-bottom: 10px;
+}
+/* Seleciona o elemento de preço do produto */
+.produto strong{
+    /* Exibe o preço como bloco para formatação de margem */
+    display: block;
+    /* Tamanho do texto do preço */
+    font-size: 1.1rem;
+    /* Cor para destacar o valor */
+    color: #d4af37;
+    /* Margem antes do botão de compra */
+    margin-bottom: 12px;
+}
+/* Seleciona o botão de ação no cartão do produto */
+.botao-comprar{
+    /* Exibe o botão cobrindo todo o espaço do container */
+    display: block;
+    /* Preenchimento interno do botão */
+    padding: 10px;
+    /* Cor de fundo */
+    background-color: #d4af37;
+    /* Cor do texto */
+    color: #000000;
+    /* Peso de fonte em negrito */
+    font-weight: bold;
+    /* Remove a linha do link */
+    text-decoration: none;
+    /* Arredondamento das pontas do botão */
+    border-radius: 4px;
+    /* Transição suave ao passar o cursor */
+    transition: background-color 0.3s;
+}
+/* Efeito ao passar o mouse sobre o botão de compra */
+.botao-comprar:hover{
+    /* Altera o fundo */
+    background-color: #f3c623;
+}
+/* ESTILOS DOS CONTROLES DE PAGINAÇÃO */
+/* Seleciona a barra de botões de paginação */
+.paginacao{
+    /* Layout flexível */
+    display: flex;
+    /* Centraliza os botões de páginas */
+    justify-content: center;
+    /* Alinha os botões na mesma altura */
+    align-items: center;
+    /* Espaçamento horizontal entre botões de navegação */
+    gap: 8px;
+    /* Margem superior separando do catálogo de produtos */
+    margin-top: 35px;
+}
+/* Seleciona os botões numéricos e de setas da paginação */
+.paginacao button{
+    /* Define o tamanho interno dos botões */
+    padding: 8px 14px;
+    /* Cor de fundo */
+    background-color: #141414;
+    /* Borda */
+    border: 1px solid #2a2a2a;
+    /* Cor do texto branca */
+    color: #ffffff;
+    /* Cantos levemente arredondados */
+    border-radius: 4px;
+    /* Cursor no formato clicável */
+    cursor: pointer;
+    /* Animação suave para as mudanças visuais */
+    transition: background-color 0.3s, border-color 0.3s;
+}
+/* Efeito ao passar o mouse nos botões de paginação */
+.paginacao button:hover:not(:disabled){
+    /* Muda a cor da borda */
+    border-color: #d4af37;
+    /* Muda a cor do texto */
+    color: #d4af37;
+}
+/* Seleciona a página ativa atual na barra de paginação */
+.paginacao button.ativa{
+    /* Cor do fundo para a página selecionada */
+    background-color: #d4af37;
+    /* Cor do texto do número ativo */
+    color: #000000;
+    /* Borda sólida na cor do elemento */
+    border-color: #d4af37;
+    /* Fonte em negrito para destacar */
+    font-weight: bold;
+}
+/* Seleciona o botão de navegação desabilitado */
+.paginacao button:disabled{
+    /* Transparência parcial para demonstrar desabilitação */
+    opacity: 0.4;
+    /* Altera o estilo do ponteiro para desativado */
+    cursor: not-allowed;
+}
+
+
+
+/* ============== ESPECÍFICO DE SOBRE NÓS ============== */
+/* Seleciona a seção contêiner dos manifestos */
+.manifestos-container{
+    /* Aplica o espaçamento interno */
+    padding: 60px 10%;
+    /* Define a cor de fundo da seção */
+    background-color: #141414;
+}
+/* Seleciona o título principal dos manifestos */
+.manifestos-container h2{
+    /* Centraliza o título */
+    text-align: center;
+    /* Define o tamanho da fonte */
+    font-size: 2.2rem;
+    /* Adiciona margem na parte inferior */
+    margin-bottom: 40px;
+}
+/* Seleciona o grupo/grade dos cartões de manifesto */
+.grid-manifestos{
+    /* Habilita o layout flexível */
+    display: flex;
+    /* Permite que os cartões dobrem de linha conforme o espaço */
+    flex-wrap: wrap;
+    /* Define a distância entre os cartões */
+    gap: 20px;
+    /* Adiciona espaçamento na parte inferior */
+    margin-bottom: 50px;
+}
+/* Seleciona a numeração em destaque do manifesto */
+.numero-manifesto{
+    /* Define o tamanho do número */
+    font-size: 1.8rem;
+    /* Aplica o peso em negrito */
+    font-weight: bold;
+    /* Define a cor do número */
+    color: #d4af37;
+    /* Exibe o número como um bloco isolado */
+    display: block;
+    /* Adiciona distância em relação ao texto */
+    margin-bottom: 10px;
+}
+/* Seleciona o título da área de bordões */
+.bordoes-secao h3{
+    /* Define o tamanho da fonte do título */
+    font-size: 1.6rem;
+    /* Centraliza o alinhamento do texto */
+    text-align: center;
+    /* Adiciona espaçamento abaixo do título */
+    margin-bottom: 30px;
+}
+/* Seleciona o container organizador dos bordões */
+.bordoes-grid{
+    /* Habilita o layout flexível */
+    display: flex;
+    /* Permite a quebra dos elementos em várias linhas */
+    flex-wrap: wrap;
+    /* Define a distância entre as categorias */
+    gap: 20px;
+}
+/* Seleciona o bloco de categoria de bordão */
+.categoria-bordao{
+    /* Define a cor de fundo do bloco */
+    background-color: #1e1e1e;
+    /* Aplica espaçamento interno */
+    padding: 20px;
+    /* Arredonda as pontas do container */
+    border-radius: 6px;
+    /* Aplica uma borda fina ao redor do bloco */
+    border: 1px solid #2a2a2a;
+    /* Define o comportamento adaptável do bloco na tela */
+    flex: 1 1 250px;
+}
+/* Seleciona o sub-título da categoria */
+.categoria-bordao h4{
+    /* Define o tamanho da fonte */
+    font-size: 1.1rem;
+    /* Adiciona margem inferior */
+    margin-bottom: 15px;
+    /* Define a cor do texto do título */
+    color: #d4af37;
+}
+/* Seleciona a lista de frases */
+.categoria-bordao ul{
+    /* Remove os marcadores/pontos da lista */
+    list-style: none;
+}
+/* Seleciona cada frase da lista */
+.categoria-bordao li{
+    /* Aplica espaçamento interno superior e inferior */
+    padding: 6px 0;
+    /* Cria uma linha divisória na parte inferior */
+    border-bottom: 1px solid #2a2a2a;
+    /* Define o tamanho da fonte */
+    font-size: 0.9rem;
+    /* Define a cor do texto da frase */
+    color: #a0a0a0;
+}
+/* Seleciona a categoria com foco principal */
+.categoria-bordao.destaque-marca{
+    /* Altera a cor da borda do container de destaque */
+    border: 1px solid #d4af37;
+}
+/* Seleciona a caixa do bordão oficial */
+.bordao-principal{
+    /* Adiciona margem na parte superior */
+    margin-top: 15px;
+    /* Aplica espaçamento interno */
+    padding: 10px;
+    /* Define a cor de fundo da caixa */
+    background-color: #2a2a2a;
+    /* Arredonda as bordas da caixa */
+    border-radius: 4px;
+    /* Centraliza o texto */
+    text-align: center;
+    /* Define a cor do texto */
+    color: #d4af37;
+}
+
+
+
+/* ============== ESPECÍFICO DE CONTATO ============== */
+/* Seleciona o container principal da seção de contato */
+.contato-secao{
+    /* Define o espaçamento interno superior/inferior de 80px e lateral de 5% */
+    padding: 80px 5%;
+    /* Define a cor de fundo preta padrão do site */
+    background-color: #0a0a0a;
+}
+/* Seleciona a caixa que limita a largura do conteúdo de contato */
+.contato-container{
+    /* Limita a largura máxima da seção */
+    max-width: 1100px;
+    /* Centraliza o bloco horizontalmente na tela */
+    margin: 0 auto;
+}
+/* Seleciona o bloco de cabeçalho da seção */
+.contato-header{
+    /* Centraliza os textos do título e da descrição */
+    text-align: center;
+    /* Adiciona espaçamento na parte inferior */
+    margin-bottom: 40px;
+}
+/* Seleciona o título principal da seção de contato */
+.contato-header h2{
+    /* Define o tamanho da fonte do título */
+    font-size: 2.2rem;
+    /* Define a cor do texto para branco */
+    color: #ffffff;
+    /* Adiciona margem na parte inferior */
+    margin-bottom: 10px;
+}
+/* Seleciona o parágrafo descritivo do cabeçalho */
+.contato-header p{
+    /* Define a cor para o texto secundário */
+    color: #a0a0a0;
+    /* Define o tamanho da fonte */
+    font-size: 1rem;
+    /* Limita a largura máxima do texto descritivo */
+    max-width: 600px;
+    /* Centraliza o bloco de texto horizontalmente */
+    margin: 0 auto;
+}
+/* Seleciona o container organizador dos cartões e do formulário */
+.contato-conteudo{
+    /* Habilita o layout flexível */
+    display: flex;
+    /* Permite que os elementos dobrem de linha em telas menores */
+    flex-wrap: wrap;
+    /* Define o espaçamento entre as colunas */
+    gap: 40px;
+    /* Distribui os elementos com espaço entre as extremidades */
+    justify-content: space-between;
+}
+/* Seleciona a coluna contendo os cartões de informações */
+.contato-info{
+    /* Define o comportamento flexível e largura base inicial */
+    flex: 1 1 320px;
+    /* Habilita o layout flexível */
+    display: flex;
+    /* Organiza os cartões em coluna */
+    flex-direction: column;
+    /* Define a distância entre cada cartão de canal */
+    gap: 20px;
+}
+/* Seleciona cada cartão de informação individual */
+.info-card{
+    /* Habilita o layout flexível */
+    display: flex;
+    /* Centraliza o ícone e os textos verticalmente */
+    align-items: center;
+    /* Define o espaçamento entre o ícone e o texto */
+    gap: 15px;
+    /* Define a cor de fundo do cartão */
+    background-color: #141414;
+    /* Aplica o espaçamento interno no cartão */
+    padding: 27px;
+    /* Arredonda os cantos da caixa */
+    border-radius: 6px;
+    /* Aplica uma linha de borda fina ao redor da caixa */
+    border: 1px solid #2a2a2a;
+    /* Define a transição suave para borda e movimento */
+    transition: border-color 0.3s, transform 0.3s;
+}
+/* Seleciona a interação ao passar o mouse sobre o cartão */
+.info-card:hover{
+    /* Altera a cor da borda */
+    border-color: #d4af37;
+    /* Desloca o cartão ligeiramente para cima */
+    transform: translateY(-2px);
+}
+/* Seleciona a imagem de ícone dentro do cartão */
+.info-img{
+    /* Define a largura fixa do ícone */
+    width: 40px;
+    /* Define a altura fixa do ícone */
+    height: 40px;
+    /* Garante que a imagem mantenha a proporção original sem distorcer */
+    object-fit: contain;
+    /* Impede que o ícone encolha se o texto ao lado for grande */
+    flex-shrink: 0;
+    /* Arredonda os cantos da imagem do ícone */
+    border-radius: 40%;
+    /* Aplica uma borda fina colorida ao redor da imagem */
+    border: 1px solid #d4af37;
+    /* Adiciona um espaçamento entre a borda e a imagem interna */
+    padding: 4px;
+}
+/* Seleciona o título de cada cartão */
+.info-texto h3{
+    /* Define o tamanho da fonte */
+    font-size: 1.1rem;
+    /* Define a cor do texto para branco */
+    color: #ffffff;
+    /* Adiciona uma leve margem na parte inferior */
+    margin-bottom: 2px;
+}
+/* Seleciona a descrição dentro do cartão */
+.info-texto p{
+    /* Define o tamanho da fonte */
+    font-size: 0.85rem;
+    /* Define a cor para o texto secundário */
+    color: #a0a0a0;
+}
+/* Seleciona os links em destaque dentro dos cartões */
+.link-destaque{
+    /* Define a cor para o link */
+    color: #d4af37;
+    /* Remove o sublinhado padrão */
+    text-decoration: none;
+    /* Deixa o texto em negrito */
+    font-weight: bold;
+    /* Define o tamanho da fonte */
+    font-size: 0.95rem;
+    /* Permite aplicar margens no elemento em linha */
+    display: inline-block;
+    /* Adiciona espaçamento acima do link */
+    margin-top: 4px;
+    /* Define a transição suave para a troca de cor */
+    transition: color 0.3s;
+}
+/* Seleciona a interação ao passar o mouse sobre o link em destaque */
+.link-destaque:hover{
+    /* Altera a cor na sobreposição */
+    color: #f3c623;
+}
+/* Seleciona o formulário de contato */
+.contato-form{
+    /* Define o comportamento flexível e largura base inicial */
+    flex: 1 1 420px;
+    /* Define a cor de fundo do painel do formulário */
+    background-color: #141414;
+    /* Aplica o espaçamento interno */
+    padding: 30px;
+    /* Arredonda os cantos da caixa */
+    border-radius: 8px;
+    /* Aplica uma linha de borda ao redor do formulário */
+    border: 1px solid #2a2a2a;
+    /* Habilita o layout flexível */
+    display: flex;
+    /* Organiza os campos em formato de coluna */
+    flex-direction: column;
+    /* Define o espaçamento entre os campos */
+    gap: 15px;
+}
+/* Seleciona o título interno do formulário */
+.contato-form h3{
+    /* Define o tamanho da fonte */
+    font-size: 1.4rem;
+    /* Define a cor do texto para branco */
+    color: #ffffff;
+    /* Adiciona margem na parte inferior */
+    margin-bottom: 10px;
+}
+/* Seleciona as caixas de seleção e área de texto */
+.grupo-input select, .grupo-input textarea{
+    /* Define a cor de fundo dos campos */
+    background-color: #1e1e1e;
+    /* Aplica uma borda fina ao redor dos campos */
+    border: 1px solid #2a2a2a;
+    /* Define o espaçamento interno de digitação */
+    padding: 12px;
+    /* Arredonda as pontas das caixas */
+    border-radius: 4px;
+    /* Define a cor do texto digitado */
+    color: #ffffff;
+    /* Define o tamanho da fonte */
+    font-size: 0.95rem;
+    /* Herda a família de fontes do elemento pai */
+    font-family: inherit;
+    /* Transição suave ao focar no campo */
+    transition: border-color 0.3s;
+}
+/* Seleciona o estado de foco na seleção e na área de texto */
+.grupo-input select:focus, .grupo-input textarea:focus{
+    /* Altera a cor da borda quando selecionado */
+    border-color: #d4af37;
+    /* Remove o contorno padrão do navegador */
+    outline: none;
+}
+/* Seleciona a caixa de mensagem de texto multilinha */
+.grupo-input textarea{
+    /* Permite ao usuário redimensionar a caixa apenas no eixo vertical */
+    resize: vertical;
+}
+
+
+
+/* ============== ESPECÍFICO DE FINALIZAR COMPRA ============== */
+/* PÁGINA DE CHECKOUT / FINALIZAR COMPRA */
+/* Seção Principal do Checkout */
+.checkout-secao{
+    /* Adiciona um espaçamento interno de 50px no topo e na base, e 5% nas laterais */
+    padding: 50px 5%;
+    /* Define a largura máxima do contêiner para 1200px */
+    max-width: 1200px;
+    /* Centraliza a seção horizontalmente na página */
+    margin: 0 auto;
+}
+.checkout-header{
+    /* Centraliza o texto do cabeçalho */
+    text-align: center;
+    /* Adiciona um espaçamento externo inferior */
+    margin-bottom: 40px;
+}
+.checkout-header h2{
+    /* Define o tamanho da fonte */
+    font-size: 2.2rem;
+    /* Define a cor do texto */
+    color: #ffffff;
+    /* Adiciona um espaçamento externo inferior */
+    margin-bottom: 5px;
+}
+/* Layout Responsivo de Duas Colunas */
+.checkout-container{
+    /* Ativa o modelo de layout Flexbox */
+    display: flex;
+    /* Permite que os elementos quebrem para a próxima linha se não houver espaço */
+    flex-wrap: wrap;
+    /* Cria um espaçamento entre os elementos filhos */
+    gap: 30px;
+    /* Alinha os itens flexíveis ao topo do contêiner */
+    align-items: flex-start;
+}
+/* Formulário de Finalização */
+.checkout-container .formulario{
+    /* Permite que o elemento cresça e encolha com largura base de 500px */
+    flex: 1 1 500px;
+    /* Define a cor de fundo do formulário */
+    background-color: #141414;
+    /* Adiciona uma borda sólida */
+    border: 1px solid #2a2a2a;
+    /* Arredonda os cantos da caixa */
+    border-radius: 8px;
+    /* Adiciona um espaçamento interno em todos os lados */
+    padding: 30px;
+}
+.checkout-container .formulario h3{
+    /* Define o tamanho da fonte */
+    font-size: 1.3rem;
+    /* Define a cor do texto */
+    color: #ffffff;
+    /* Cria uma linha divisória na parte inferior com borda sólida */
+    border-bottom: 1px solid #2a2a2a;
+    /* Adiciona um espaçamento interno inferior acima da linha */
+    padding-bottom: 12px;
+    /* Adiciona um espaçamento externo inferior abaixo da linha */
+    margin-bottom: 20px;
+}
+/* Layout em grade para CEP e Endereço */
+.campo-duplo{
+    /* Ativa o Flexbox para organizar os campos em linha */
+    display: flex;
+    /* Cria um espaçamento entre os campos */
+    gap: 15px;
+    /* Permite quebrar linha caso a tela fique pequena */
+    flex-wrap: wrap;
+}
+.campo-duplo .grupo-input{
+    /* Ocupa 1 proporção do espaço disponível na linha */
+    flex: 1;
+    /* Define a largura mínima do campo antes de quebrar linha */
+    min-width: 140px;
+}
+.campo-duplo .flex-2{
+    /* Ocupa 2 proporções do espaço disponível (o dobro do grupo-input simples) */
+    flex: 2;
+    /* Define a largura mínima do campo antes de quebrar linha */
+    min-width: 220px;
+}
+.botao-checkout{
+    /* Faz o botão ocupar toda a largura disponível (100%) */
+    width: 100%;
+    /* Adiciona um espaçamento externo superior */
+    margin-top: 20px;
+    /* Define o tamanho da fonte */
+    font-size: 1rem;
+    /* Adiciona um espaçamento entre as letras do texto */
+    letter-spacing: 1px;
+}
+/* Card de Resumo do Pedido */
+.checkout-container .resumo{
+    /* Permite crescer/encolher com largura base de 350px */
+    flex: 1 1 350px;
+    /* Define a cor de fundo */
+    background-color: #141414;
+    /* Adiciona uma borda sólida */
+    border: 1px solid #2a2a2a;
+    /* Arredonda os cantos */
+    border-radius: 8px;
+    /* Adiciona um espaçamento interno */
+    padding: 30px;
+    /* Fixa o elemento na tela durante a rolagem */
+    position: sticky;
+    /* Distância do topo da janela ao acompanhar a rolagem */
+    top: 90px;
+}
+.checkout-container .resumo h3{
+    /* Define o tamanho da fonte */
+    font-size: 1.3rem;
+    /* Define a cor do texto */
+    color: #d4af37;
+    /* Cria uma linha divisória sólida na parte inferior */
+    border-bottom: 1px solid #2a2a2a;
+    /* Adiciona um espaçamento interno inferior */
+    padding-bottom: 12px;
+    /* Adiciona um espaçamento externo inferior */
+    margin-bottom: 20px;
+}
+.resumo-itens{
+    /* Define a altura máxima da lista de itens */
+    max-height: 250px;
+    /* Exibe uma barra de rolagem vertical apenas se os itens ultrapassarem a altura máxima */
+    overflow-y: auto;
+    /* Adiciona um espaçamento externo inferior */
+    margin-bottom: 20px;
+    /* Adiciona um espaçamento interno à direita para afastar o texto da barra de rolagem */
+    padding-right: 5px;
+}
+.resumo-calculo{
+    /* Cria uma linha divisória superior */
+    border-top: 1px solid #2a2a2a;
+    /* Adiciona um espaçamento interno superior */
+    padding-top: 15px;
+    /* Ativa o Flexbox */
+    display: flex;
+    /* Organiza os elementos filhos em uma coluna vertical */
+    flex-direction: column;
+    /* Cria um espaçamento entre as linhas de cálculo */
+    gap: 12px;
+}
+.resumo-linha{
+    /* Ativa o Flexbox */
+    display: flex;
+    /* Distribui o texto com o título à esquerda e o valor à direita */
+    justify-content: space-between;
+    /* Define o tamanho da fonte */
+    font-size: 0.95rem;
+    /* Define a cor do texto  */
+    color: #a0a0a0;
+}
+.destaque-frete{
+    /* Define a cor do texto de frete */
+    color: #4cd137;
+    /* Aplica o estilo de texto em negrito */
+    font-weight: bold;
+}
+.resumo-linha.total{
+    /* Aumenta o tamanho da fonte do valor total */
+    font-size: 1.2rem;
+    /* Aplica o estilo de texto em negrito ao total */
+    font-weight: bold;
+    /* Define a cor do texto */
+    color: #ffffff;
+    /* Cria uma linha divisória superior pontilhada/tracejada de 1px */
+    border-top: 1px dashed #2a2a2a;
+    /* Adiciona um espaçamento interno superior */
+    padding-top: 12px;
+    /* Adiciona um espaçamento externo superior */
+    margin-top: 5px;
+}
+.resumo-linha.total #total-checkout{
+    /* Define a cor do valor total */
+    color: #d4af37;
+}
+.voltar-loja{
+    /* Permite aplicar margens verticais mantendo o comportamento de link em linha */
+    display: inline-block;
+    /* Adiciona um espaçamento externo superior */
+    margin-top: 25px;
+    /* Define a cor do link */
+    color: #a0a0a0;
+    /* Remove o sublinhado padrão do link */
+    text-decoration: none;
+    /* Define o tamanho da fonte */
+    font-size: 0.9rem;
+    /* Suaviza a transição da cor em 0.3 segundos ao passar o mouse */
+    transition: color 0.3s ease;
+}
+.voltar-loja:hover{
+    /* Altera a cor do texto do link ao passar o cursor por cima */
+    color: #d4af37;
+}
+/* ESTILOS DAS BOXES DINÂMICAS DE PAGAMENTO (CARTÃO E PIX) */
+/* Esconder elementos inativos */
+.escondido{
+    /* Oculta completamente o elemento da tela e força a regra com !important */
+    display: none !important;
+}
+/* Caixa genérica de detalhes do pagamento */
+.box-dinamica-pagamento{
+    /* Define o fundo da caixa de pagamento */
+    background-color: #1e1e1e;
+    /* Adiciona uma borda */
+    border: 1px solid #2a2a2a;
+    /* Adiciona uma borda de destaque no lado esquerdo */
+    border-left: 3px solid #d4af37;
+    /* Arredonda os cantos da caixa */
+    border-radius: 6px;
+    /* Adiciona um espaçamento interno */
+    padding: 20px;
+    /* Adiciona um espaçamento externo superior */
+    margin-top: 15px;
+    /* Adiciona um espaçamento externo inferior */
+    margin-bottom: 20px;
+    /* Aplica a animação 'fadeIn' com duração de 0.3 segundos e transição suave */
+    animation: fadeIn 0.3s ease-in-out;
+}
+.box-dinamica-pagamento h4{
+    /* Define a cor do título da caixa */
+    color: #d4af37;
+    /* Define o tamanho da fonte */
+    font-size: 1.05rem;
+    /* Adiciona um espaçamento externo inferior */
+    margin-bottom: 15px;
+}
+.opcional{
+    /* Reduce o tamanho da fonte */
+    font-size: 0.75rem;
+    /* Define a cor do texto */
+    color: #888888;
+    /* Remove o negrito, tornando a fonte normal */
+    font-weight: normal;
+}
+/* Estilização específica do Pix */
+.instrucao-pix{
+    /* Define o tamanho da fonte das instruções */
+    font-size: 0.9rem;
+    /* Define a cor do texto */
+    color: #cccccc;
+    /* Adiciona um espaçamento externo inferior */
+    margin-bottom: 12px;
+}
+.container-codigo-pix{
+    /* Ativa o Flexbox para alinhar o campo e o botão lado a lado */
+    display: flex;
+    /* Cria um espaçamento entre o campo de texto e o botão */
+    gap: 10px;
+    /* Alinha verticalmente os elementos ao centro */
+    align-items: center;
+}
+.container-codigo-pix input{
+    /* Faz o campo de entrada preencher todo o espaço restante do contêiner */
+    flex: 1;
+    /* Define a cor de fundo do campo */
+    background-color: #141414;
+    /* Adiciona uma borda */
+    border: 1px solid #2a2a2a;
+    /* Define a cor do texto dentro do campo */
+    color: #d4af37;
+    /* Adiciona um espaçamento interno */
+    padding: 10px;
+    /* Define uma fonte monoespaçada (estilo código) */
+    font-family: monospace;
+    /* Define o tamanho da fonte do código */
+    font-size: 0.85rem;
+    /* Arredonda os cantos do campo */
+    border-radius: 4px;
+    /* Seleciona todo o conteúdo do input automaticamente ao clicar nele */
+    user-select: all;
+}
+.botao-copiar-pix{
+    /* Define a cor de fundo do botão */
+    background-color: #d4af37;
+    /* Define a cor do texto do botão */
+    color: #0a0a0a;
+    /* Remove a borda padrão do botão */
+    border: none;
+    /* Adiciona espaçamento interno no topo/base e nas laterais */
+    padding: 10px 16px;
+    /* Define o texto do botão em negrito */
+    font-weight: bold;
+    /* Arredonda os cantos do botão */
+    border-radius: 4px;
+    /* Exibe o cursor do tipo ponteiro ao passar o mouse sobre o botão */
+    cursor: pointer;
+    /* Impede que o texto dentro do botão quebre em múltiplas linhas */
+    white-space: nowrap;
+    /* Suaviza a transição da cor de fundo em 0.2 segundos */
+    transition: background-color 0.2s;
+}
+.botao-copiar-pix:hover{
+    /* Muda a cor de fundo ao passar o mouse */
+    background-color: #f3c623;
+}
+.mensagem-copiado{
+    /* Faz com que a mensagem ocupe uma linha própria */
+    display: block;
+    /* Define a cor da mensagem */
+    color: #4cd137;
+    /* Define o tamanho da fonte */
+    font-size: 0.85rem;
+    /* Adiciona um espaçamento externo superior */
+    margin-top: 8px;
+    /* Define o texto em negrito */
+    font-weight: bold;
+}
+/* Animação suave ao abrir */
+@keyframes fadeIn {
+    /* Estado inicial da animação */
+    from {
+        /* Define a opacidade inicial como transparente */
+        opacity: 0;
+        /* Desloca o elemento 8px para cima no eixo Y */
+        transform: translateY(-8px);
+    }
+    /* Estado final da animação */
+    to {
+        /* Define a opacidade final como total (visível) */
+        opacity: 1;
+        /* Retorna o elemento para sua posição original no eixo Y */
+        transform: translateY(0);
+    }
+}
+
+
+
+/* ============== ESPECÍFICO DE MEUS PEDIDOS ============== */
+/* Seção principal que envolve toda a área de "Meus Pedidos" */
+.secao-pedidos{
+    /* Define a largura máxima da seção para não esticar demais em telas muito largas */
+    max-width: 1200px;
+    /* Aplica espaçamento externo acima e abaixo e centraliza a seção horizontalmente */
+    margin: 2rem auto;
+    /* Adiciona um espaçamento interno nas partes superior/inferior e nas laterais para evitar colar nas bordas em telas menores */
+    padding: 0 1rem;
+}
+/* Cartão individual para exibição de um pedido */
+.card-pedido{
+    /* Define uma borda fina e contínua ao redor do cartão */
+    border: 2px solid #d4af37;
+    /* Arredonda os cantos da borda do cartão */
+    border-radius: 8px;
+    /* Adiciona espaçamento interno em todas as direções dentro do cartão */
+    padding: 1rem;
+    /* Cria um espaçamento na parte inferior para afastar este cartão do próximo */
+    margin-bottom: 1.5rem;
+    /* Define a cor de fundo do cartão */
+    background-color: rgba(255, 255, 255, 0.3);
+    /* Aplica uma sombra suave abaixo do cartão */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+/* Cabeçalho superior do cartão do pedido */
+.header-pedido{
+    /* Define o modelo de layout Flexbox para alinhar os elementos filhos em linha */
+    display: flex;
+    /* Distribui os elementos filhos empurrando o primeiro para a esquerda e o último para a direita */
+    justify-content: space-between;
+
+    /* Alinha os elementos filhos verticalmente ao centro */
+    align-items: center;
+    /* Cria uma linha divisória na parte inferior */
+    border-bottom: 1px solid #d4af37;
+    /* Adiciona de espaçamento interno na parte inferior antes da linha divisória */
+    padding-bottom: 0.5rem;
+    /* Cria um espaçamento externo na parte inferior para afastar o cabeçalho dos itens do pedido */
+    margin-bottom: 1rem;
+}
+/* Estilização da data em que o pedido foi realizado */
+.data-pedido{
+    /* Define o tamanho da fonte um pouco menor que o texto padrão */
+    font-size: 0.85rem;
+    /* Define a cor do texto */
+    color: #a0a0a0;
+    /* Adiciona um espaçamento à esquerda para afastar a data do número do pedido */
+    margin-left: 0.5rem;
+}
+/* Etiqueta que exibe o status do pedido */
+.status-pedido{
+    /* Define a cor de fundo da etiqueta */
+    background-color: #d4af37;
+    /* Define a cor do texto da etiqueta */
+    color: #0a0a0a;
+    /* Aplica espaçamento interno acima/abaixo e laterais para formar a etiqueta */
+    padding: 0.25rem 0.5rem;
+    /* Arredonda os cantos da etiqueta */
+    border-radius: 4px;
+    /* Define o tamanho da fonte do status */
+    font-size: 0.85rem;
+}
+/* Linha individual representando cada produto dentro do pedido */
+.item-pedido-linha{
+    /* Utiliza Flexbox para organizar o nome do produto/quantidade e o preço na mesma linha */
+    display: flex;
+    /* Empurra o nome/quantidade para a esquerda e o preço para a direita */
+    justify-content: space-between;
+    /* Adiciona um pequeno espaçamento interno acima e abaixo de cada item da lista */
+    padding: 0.3rem 0;
+}
+/* Rodapé do cartão de pedido */
+.footer-pedido{
+    /* Adiciona uma linha na parte superior do rodapé */
+    border-top: 1px solid #d4af37;
+    /* Adiciona um espaçamento na parte superior externa para separar da lista de itens */
+    margin-top: 1rem;
+    /* Adiciona espaçamento interno na parte superior abaixo da linha divisória */
+    padding-top: 0.5rem;
+    /* Alinha o texto do valor total à direita */
+    text-align: right;
+}
+/* Bloco exibido quando o utilizador não está logado na conta */
+.mensagem-login-necessario{
+    /* Alinha o texto da mensagem e o botão ao centro */
+    text-align: center;
+    /* Adiciona um espaçamento interno em todas as direções */
+    padding: 2rem;
+    /* Aplica uma borda pontilhada/tracejada */
+    border: 1px dashed #ccc;
+    /* Arredonda os cantos da caixa da mensagem */
+    border-radius: 8px;
+}
+
