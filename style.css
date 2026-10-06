@@ -565,3 +565,59 @@ footer .copyright {
     font-size: 0.8rem;
     color: #666;
 }
+/* ============== RESPONSIVIDADE PARA CELULARES ============== */
+
+/* Evita a barra de rolagem horizontal indesejada no corpo da página */
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+@media (max-width: 768px) {
+    /* Ajusta o cabeçalho para empilhar ou adaptar elementos no mobile */
+    header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 3%;
+    }
+
+    /* Reduz levemente o tamanho do logo */
+    .logo h1 {
+        font-size: 1.1rem;
+    }
+
+    /* Ajusta os links de navegação para quebrarem linha se necessário */
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    nav a {
+        font-size: 0.85rem;
+    }
+
+    /* Agrupa e reduz os botões de ação (Entrar, Carrinho, Pedidos) */
+    .botao-entrar, .botao-carrinho, .botao-pedidos {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+
+    /* Ajusta os títulos no banner principal */
+    .banner-texto h2 {
+        font-size: 1.8rem;
+    }
+
+    .banner-texto .frase {
+        font-size: 1rem;
+    }
+
+    /* Reorganiza a seção de produtos e filtros para ficar em uma única coluna */
+    .produtos-container {
+        flex-direction: column;
+    }
+
+    .painel-filtros {
+        width: 100%;
+    }
+}
