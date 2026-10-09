@@ -45,28 +45,19 @@ header{
     /* Adiciona uma linha de borda na parte inferior */
     border-bottom: 1px solid #2a2a2a;
 }
-/* Seleciona a caixa da marca e logo */
-.logo{
-    /* Habilita o layout flexível */
-    display: flex;
-    /* Centraliza imagem e texto verticalmente */
-    align-items: center;
-    /* Define a distância entre a imagem e o título */
-    gap: 8px;
-}
-/* Seleciona a imagem do logotipo */
-.logo img{
+/* Seleciona a imagem do botao início */
+.logoinicio{
     /* Define a altura fixa da imagem */
-    height: 45px;
+    height: 65px;
     /* Ajusta a largura proporcionalmente */
     width: auto;
 }
 /* Seleciona o título do logotipo */
-.logo h1{
-    /* Define o tamanho da fonte do título */
-    font-size: 1.3rem;
-    /* Define a cor do texto do título */
-    color: #ffffff;
+.logo img{
+    /* Define a altura fixa da imagem */
+    height: 60px;
+    /* Ajusta a largura */
+    width: 200px;
 }
 /* Seleciona a barra de navegação */
 nav{
@@ -1021,29 +1012,108 @@ footer .copyright{
     /* Eleva o cartão levemente */
     transform: translateY(-4px);
 }
-/* Seleciona o container da imagem do produto */
+/* Container da foto do produto */
 .produto-imagem{
-    /* Define a largura total da área da imagem */
+    /* Define o container como referência para a posição da seta e das imagens */
+    position: relative;
+    /* Define a largura total da área da foto */
     width: 100%;
-    /* Define a altura fixa da área da imagem */
-    height: 180px;
-    /* Define a cor de fundo neutra caso a imagem não carregue */
+    /* Define a altura fixa da área da foto */
+    height: 340px;
+    /* Cor de fundo neutra caso a imagem falhe */
     background-color: #1e1e1e;
-    /* Arredonda os cantos do bloco da imagem */
+    /* Cantos arredondados */
     border-radius: 6px;
-    /* Previne o vazamento da imagem fora dos cantos */
+    /* Impede que elementos vazem do container */
     overflow: hidden;
-    /* Margem na base da área visual */
+    /* Espaçamento na base */
     margin-bottom: 12px;
 }
-/* Seleciona a imagem dentro do cartão do produto */
+/* Configuração geral para as imagens frente e verso */
 .produto-imagem img{
-    /* Define a largura total para preencher o container */
+    /* Largura total do container */
     width: 100%;
-    /* Define a altura total do bloco */
+    /* Altura total do container */
     height: 100%;
-    /* Ajusta a imagem mantendo a proporção correta sem achatar */
-    object-fit: cover;
+    /* Preenchimento com a imagem inteira */
+    object-fit: contain;
+}
+/* Imagem da frente */
+.produto-imagem .img-frente{
+    /* Visível por padrão */
+    display: block;
+    /* Transição de opacidade suave */
+    transition: opacity 0.3s ease-in-out;
+}
+/* Imagem do verso */
+.produto-imagem .img-verso{
+    /* Posiciona sobreposta à foto da frente */
+    position: absolute;
+    /* Alinha ao topo */
+    top: 0;
+    /* Alinha à esquerda */
+    left: 0;
+    /* Oculta por padrão através de opacidade zero */
+    opacity: 0;
+    /* Transição de opacidade suave */
+    transition: opacity 0.3s ease-in-out;
+}
+/* --- ESTILO DA SETINHA --- */
+.btn-trocar-foto{
+    /* Posicionamento absoluto no canto inferior direito da imagem */
+    position: absolute;
+    /* Distância do fundo da foto */
+    bottom: 8px;
+    /* Distância da direita da foto */
+    right: 8px;
+    /* Cor de fundo do botão da seta */
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Cor da seta */
+    color: #d4af37;
+    /* Remove a borda padrão */
+    border: none;
+    /* Formato circular para o botão */
+    border-radius: 50%;
+    /* Largura fixa do botão */
+    width: 32px;
+    /* Altura fixa do botão */
+    height: 32px;
+    /* Apontador do mouse ao passar por cima */
+    cursor: pointer;
+    /* Centralização do ícone da seta */
+    display: flex;
+    /* Centraliza na horizontal */
+    align-items: center;
+    /* Centraliza na vertical */
+    justify-content: center;
+    /* Tamanho da seta */
+    font-size: 14px;
+    /* Garante que o botão fique acima das imagens */
+    z-index: 10;
+    /* Transição para efeito visual ao clicar/hover */
+    transition: transform 0.3s ease, background-color 0.2s ease;
+}
+/* Efeito ao passar o mouse na setinha */
+.btn-trocar-foto:hover{
+    /* Destaca o fundo da seta */
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Borda do botão */
+    border: 1px solid #d4af37;
+}
+/* --- COMPORTAMENTO DE TROCA AO CLICAR --- */
+/* Quando a classe 'mostrar-verso' é adicionada ao container via JS */
+.produto-imagem.mostrar-verso .img-verso{
+    /* Mostra o verso */
+    opacity: 1;
+}
+.produto-imagem.mostrar-verso .img-frente{
+    /* Oculta a frente */
+    opacity: 0;
+}
+/* Gira a setinha para indicar retorno à frente */
+.produto-imagem.mostrar-verso .btn-trocar-foto{
+    /* Inverte a direção da seta */
+    transform: rotate(180deg);
 }
 /* Seleciona o nome do produto */
 .produto h3{
@@ -1846,162 +1916,4 @@ ul li::marker{
     border: 1px dashed #ccc;
     /* Arredonda os cantos da caixa da mensagem */
     border-radius: 8px;
-}
-/* ==========================================
-   CONFIGURAÇÕES RESPONSIVAS (DISPOSITIVOS MÓVEIS)
-   ========================================== */
-
-@media (max-width: 768px) {
-    /* --- CABEÇALHO E NAVEGAÇÃO --- */
-    header {
-        flex-direction: column;
-        gap: 15px;
-        padding: 15px 3%;
-    }
-
-    nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
-
-    nav a {
-        font-size: 0.8rem;
-    }
-
-    .botao-entrar {
-        font-size: 0.8rem;
-        padding: 6px 10px;
-    }
-
-    /* --- BANNER PRINCIPAL (INDEX) --- */
-    .banner {
-        padding: 80px 15px;
-        background-size: cover; /* Ajusta a imagem de fundo em telas menores */
-    }
-
-    .banner-texto h2 {
-        font-size: 1.8rem;
-    }
-
-    /* --- PÁGINA DE PRODUTOS E FILTROS --- */
-    .produtos-container {
-        flex-direction: column;
-    }
-
-    .painel-filtros {
-        width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .lista-produtos {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 15px;
-    }
-
-    /* --- FORMULÁRIOS (CONTATO E CHECKOUT) --- */
-    .contato-conteudo,
-    .checkout-container {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .campo-duplo {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    /* --- MODAIS E GAVETA DO CARRINHO --- */
-    .modal-conteudo {
-        width: 95%;
-        padding: 20px;
-    }
-
-    .carrinho-drawer {
-        max-width: 100%; /* Ocupa a tela inteira em celulares para facilitar o uso */
-    }
-
-    /* --- MANIFESTO / SOBRE NÓS --- */
-    .grid-manifestos {
-        grid-template-columns: 1fr;
-    }
-}
-/* ==========================================
-   AJUSTES RESPONSIVOS FORÇADOS PARA PRODUTOS E MÓVEIS
-   ========================================== */
-
-@media screen and (max-width: 768px) {
-    /* --- ESTRUTURA DA PÁGINA DE PRODUTOS --- */
-    .produtos, #produtos {
-        padding: 20px 3% !important;
-    }
-
-    .produtos-container {
-        display: flex !important;
-        flex-direction: column !important;
-        width: 100% !important;
-        gap: 20px !important;
-    }
-
-    /* --- PAINEL DE FILTROS --- */
-    .painel-filtros {
-        width: 100% !important;
-        flex: 1 1 100% !important;
-        box-sizing: border-box !important;
-    }
-
-    /* --- WRAPPER E CATÁLOGO DE PRODUTOS --- */
-    .catalogo-wrapper {
-        width: 100% !important;
-        flex: 1 1 100% !important;
-        min-width: 0 !important;
-    }
-
-    .lista-produtos {
-        display: grid !important;
-        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)) !important;
-        gap: 10px !important;
-        width: 100% !important;
-    }
-
-    /* --- CARDS DOS PRODUTOS --- */
-    .card-produto, .produto, #produtos .produto {
-        padding: 10px !important;
-        box-sizing: border-box !important;
-    }
-
-    .produto-imagem {
-        height: 130px !important;
-        margin-bottom: 8px !important;
-    }
-
-    .produto h3 {
-        font-size: 0.85rem !important;
-    }
-
-    .produto p {
-        font-size: 0.75rem !important;
-    }
-
-    .produto strong {
-        font-size: 0.9rem !important;
-        margin-bottom: 8px !important;
-    }
-
-    .botao-comprar {
-        font-size: 0.75rem !important;
-        padding: 8px 4px !important;
-    }
-
-    /* --- PAGINAÇÃO --- */
-    .paginacao {
-        flex-wrap: wrap !important;
-        gap: 5px !important;
-        margin-top: 20px !important;
-    }
-
-    .paginacao button {
-        padding: 6px 10px !important;
-        font-size: 0.8rem !important;
-    }
 }
