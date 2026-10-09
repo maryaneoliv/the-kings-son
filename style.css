@@ -5,8 +5,10 @@
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden; /* Impede a rolagem horizontal indesejada */
 }
 
 body {
@@ -14,33 +16,39 @@ body {
     color: #f0f0f0;
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    overflow-x: hidden;
 }
 
-/* ============== CABEÇALHO ============== */
+/* ============== CABEÇALHO (MOBILE FIRST) ============== */
 header {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column; /* Empilha os elementos no telemóvel */
     align-items: center;
-    padding: 15px 5%;
+    justify-content: center;
+    padding: 10px 15px;
     background-color: #141414;
     position: sticky;
     top: 0;
     z-index: 1000;
     border-bottom: 1px solid #2a2a2a;
-    flex-wrap: wrap;
+    width: 100%;
     gap: 10px;
 }
 
+.logo {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
 .logo img {
-    height: 50px;
+    height: 40px;
     width: auto;
-    max-width: 160px;
+    max-width: 180px;
     object-fit: contain;
 }
 
 .logoinicio {
-    height: 45px;
+    height: 32px;
     width: auto;
     object-fit: contain;
 }
@@ -48,16 +56,19 @@ header {
 nav {
     display: flex;
     align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap; /* Permite quebrar linha se não couber no ecrã */
+    width: 100%;
 }
 
 nav a {
     color: #a0a0a0;
     text-decoration: none;
     font-weight: bold;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     transition: color 0.3s;
+    white-space: nowrap;
 }
 
 nav a:hover {
@@ -67,18 +78,13 @@ nav a:hover {
 .botao-entrar {
     background-color: transparent;
     color: #d4af37;
-    border: 2px solid #d4af37;
-    padding: 6px 10px;
+    border: 1.5px solid #d4af37;
+    padding: 4px 8px;
     font-weight: bold;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     cursor: pointer;
     border-radius: 4px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.botao-entrar:hover {
-    background-color: #d4af37;
-    color: #0a0a0a;
+    white-space: nowrap;
 }
 
 .botao-carrinho, .botao-pedidos {
@@ -86,38 +92,34 @@ nav a:hover {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 35px;
+    width: 34px;
+    height: 32px;
     background: transparent;
-    border: 2px solid #d4af37;
+    border: 1.5px solid #d4af37;
     border-radius: 4px;
     cursor: pointer;
-    overflow: visible;
 }
 
 #contador-carrinho {
     position: absolute;
-    top: -6px;
-    right: -6px;
+    top: -5px;
+    right: -5px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     background-color: #d4af37;
     color: #0a0a0a;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: bold;
     border-radius: 50%;
-    line-height: 1;
 }
 
 .icone-carrinho-img, .icone-pedidos-img {
-    width: 22px;
-    height: 22px;
+    width: 18px;
+    height: 18px;
     object-fit: contain;
-    display: block;
-    transition: transform 0.2s ease;
 }
 
 /* ============== MODAL AUTENTICAÇÃO ============== */
@@ -126,8 +128,8 @@ nav a:hover {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.85);
     z-index: 2000;
     align-items: center;
@@ -142,8 +144,8 @@ nav a:hover {
 .modal-conteudo {
     background-color: #1e1e1e;
     width: 100%;
-    max-width: 400px;
-    padding: 25px 20px;
+    max-width: 380px;
+    padding: 20px 15px;
     border-radius: 8px;
     border: 1px solid #d4af37;
     position: relative;
@@ -153,7 +155,7 @@ nav a:hover {
     position: absolute;
     top: 10px;
     right: 15px;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     color: #a0a0a0;
     cursor: pointer;
     background: none;
@@ -162,7 +164,7 @@ nav a:hover {
 
 .modal-abas {
     display: flex;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     border-bottom: 1px solid #2a2a2a;
 }
 
@@ -171,8 +173,8 @@ nav a:hover {
     background: none;
     border: none;
     color: #a0a0a0;
-    padding: 10px;
-    font-size: 0.95rem;
+    padding: 8px;
+    font-size: 0.9rem;
     font-weight: bold;
     cursor: pointer;
 }
@@ -185,7 +187,7 @@ nav a:hover {
 .form-auth {
     display: none;
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
 }
 
 .form-auth.ativa {
@@ -195,21 +197,22 @@ nav a:hover {
 .grupo-input {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 4px;
+    width: 100%;
 }
 
 .grupo-input label {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: #a0a0a0;
 }
 
 .grupo-input input, .grupo-input select, .grupo-input textarea {
     background-color: #141414;
     border: 1px solid #2a2a2a;
-    padding: 12px;
+    padding: 10px;
     border-radius: 4px;
     color: #ffffff;
-    font-size: 1rem;
+    font-size: 0.95rem;
     width: 100%;
 }
 
@@ -222,17 +225,13 @@ nav a:hover {
     background-color: #d4af37;
     color: #0a0a0a;
     border: none;
-    padding: 12px;
+    padding: 10px;
     font-weight: bold;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 10px;
-    font-size: 1rem;
+    margin-top: 8px;
+    font-size: 0.95rem;
     width: 100%;
-}
-
-.botao-submit:hover {
-    background-color: #f3c623;
 }
 
 /* ============== GAVETA DO CARRINHO ============== */
@@ -241,11 +240,10 @@ nav a:hover {
     top: 0;
     right: -100%;
     width: 100%;
-    max-width: 380px;
+    max-width: 320px;
     height: 100%;
     background-color: #141414;
     border-left: 1px solid #2a2a2a;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
     z-index: 2000;
     transition: right 0.3s ease;
 }
@@ -258,7 +256,7 @@ nav a:hover {
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 20px;
+    padding: 15px;
 }
 
 .carrinho-cabecalho {
@@ -266,39 +264,40 @@ nav a:hover {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #2a2a2a;
-    padding-bottom: 15px;
+    padding-bottom: 10px;
 }
 
 .carrinho-cabecalho h3 {
     color: #d4af37;
+    font-size: 1.1rem;
 }
 
 #fechar-carrinho {
     background: none;
     border: none;
     color: #fff;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     cursor: pointer;
 }
 
 .carrinho-itens {
     flex: 1;
     overflow-y: auto;
-    margin: 20px 0;
+    margin: 15px 0;
 }
 
 .item-carrinho {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 15px;
-    padding-bottom: 15px;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
     border-bottom: 1px solid #2a2a2a;
 }
 
 .item-carrinho img {
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
     object-fit: cover;
     border-radius: 4px;
 }
@@ -308,23 +307,23 @@ nav a:hover {
 }
 
 .detalhes-item h4 {
-    font-size: 0.85rem;
-    margin-bottom: 4px;
+    font-size: 0.8rem;
+    margin-bottom: 2px;
 }
 
 .controles-qtd {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-top: 5px;
+    gap: 6px;
+    margin-top: 4px;
 }
 
 .controles-qtd button {
     background-color: #2a2a2a;
     border: none;
     color: #fff;
-    width: 26px;
-    height: 26px;
+    width: 22px;
+    height: 22px;
     border-radius: 4px;
     cursor: pointer;
 }
@@ -333,64 +332,66 @@ nav a:hover {
     background: none;
     border: none;
     color: #ff6b6b;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     cursor: pointer;
 }
 
 .carrinho-rodape {
     border-top: 1px solid #2a2a2a;
-    padding-top: 15px;
+    padding-top: 12px;
 }
 
 .carrinho-vazio {
     color: #a0a0a0;
     text-align: center;
-    margin-top: 40px;
+    margin-top: 30px;
+    font-size: 0.9rem;
 }
 
 /* ============== INDEX / BANNER ============== */
 .banner {
-    padding: 100px 20px;
+    padding: 60px 15px;
     text-align: center;
-    background-image: linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.75)), url(./imagens/produto1.jpg);
+    background-image: linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.8)), url(./imagens/produto1.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     border-bottom: 1px solid #2a2a2a;
+    width: 100%;
 }
 
 .banner-texto .frase {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: #fff;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .banner-texto h2 {
-    font-size: 2.2rem;
-    margin-bottom: 10px;
+    font-size: 1.8rem;
+    margin-bottom: 8px;
     color: #d4af37;
 }
 
 .banner-texto p {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #fff;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .botao {
     display: inline-block;
     background-color: #d4af37;
     color: #0a0a0a;
-    padding: 12px 24px;
+    padding: 10px 20px;
     font-weight: bold;
     text-decoration: none;
     border-radius: 4px;
-    transition: background-color 0.3s;
+    font-size: 0.9rem;
 }
 
 .faixa-intro {
-    padding: 50px 20px;
+    padding: 30px 15px;
     display: flex;
     justify-content: center;
     background-image: url(./imagens/logopng.png);
@@ -399,12 +400,13 @@ nav a:hover {
     background-size: contain;
     background-color: #fff;
     border-bottom: 1px solid #2a2a2a;
+    width: 100%;
 }
 
 .intro {
-    max-width: 800px;
-    background-color: rgba(10, 10, 10, 0.9);
-    padding: 30px 20px;
+    width: 100%;
+    background-color: rgba(10, 10, 10, 0.92);
+    padding: 20px 15px;
     border-radius: 8px;
     text-align: center;
     border-left: 4px solid #d4af37;
@@ -412,97 +414,97 @@ nav a:hover {
 }
 
 .intro p {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-style: italic;
 }
 
 /* ============== PRODUTOS E CATÁLOGO ============== */
 .produtos {
-    padding: 30px 4%;
-    scroll-margin-top: 80px;
+    padding: 20px 12px;
+    width: 100%;
 }
 
 .produtos h2 {
     text-align: center;
-    font-size: 1.8rem;
-    margin-bottom: 5px;
+    font-size: 1.5rem;
+    margin-bottom: 4px;
     color: #d4af37;
 }
 
 .subtitulo {
     text-align: center;
     color: #a0a0a0;
-    margin-bottom: 25px;
-    font-size: 0.95rem;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
 }
 
 .produtos-container {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
 }
 
 .painel-filtros {
-    flex: 1 1 100%;
+    width: 100%;
     background-color: #141414;
     border: 1px solid #2a2a2a;
     border-radius: 8px;
-    padding: 15px;
+    padding: 12px;
 }
 
 .painel-filtros h3 {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: #fff;
     border-bottom: 1px solid #2a2a2a;
-    padding-bottom: 8px;
-    margin-bottom: 12px;
+    padding-bottom: 6px;
+    margin-bottom: 10px;
 }
 
 .grupo-filtro {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .grupo-filtro h4 {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #d4af37;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .grupo-filtro label {
     display: inline-block;
-    margin-right: 12px;
-    margin-bottom: 6px;
-    font-size: 0.85rem;
+    margin-right: 10px;
+    margin-bottom: 4px;
+    font-size: 0.8rem;
     color: #a0a0a0;
-    cursor: pointer;
 }
 
 .botao-limpar {
     width: 100%;
-    padding: 10px;
+    padding: 8px;
     background-color: transparent;
     color: #d4af37;
     border: 1px solid #d4af37;
     border-radius: 4px;
-    cursor: pointer;
+    font-size: 0.85rem;
 }
 
 .catalogo-wrapper {
-    flex: 1 1 100%;
+    width: 100%;
 }
 
 .lista-produtos {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(2, 1fr); /* 2 produtos por linha no telemóvel */
+    gap: 10px;
+    width: 100%;
 }
 
 .produto {
     background-color: #141414;
     border: 1px solid #2a2a2a;
     border-radius: 8px;
-    padding: 10px;
+    padding: 8px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -512,11 +514,11 @@ nav a:hover {
 .produto-imagem {
     position: relative;
     width: 100%;
-    height: 220px;
+    height: 180px;
     background-color: #1e1e1e;
     border-radius: 6px;
     overflow: hidden;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .produto-imagem img {
@@ -540,19 +542,18 @@ nav a:hover {
 
 .btn-trocar-foto {
     position: absolute;
-    bottom: 6px;
-    right: 6px;
+    bottom: 5px;
+    right: 5px;
     background-color: rgba(0, 0, 0, 0.85);
     color: #d4af37;
     border: 1px solid #d4af37;
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
+    width: 26px;
+    height: 26px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 12px;
+    font-size: 11px;
     z-index: 10;
 }
 
@@ -569,48 +570,46 @@ nav a:hover {
 }
 
 .produto h3 {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     margin-bottom: 4px;
 }
 
 .produto strong {
     display: block;
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #d4af37;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .botao-comprar {
     display: block;
-    padding: 8px 5px;
+    padding: 8px 4px;
     background-color: #d4af37;
     color: #000000;
     font-weight: bold;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     text-decoration: none;
     border-radius: 4px;
     width: 100%;
     border: none;
-    cursor: pointer;
 }
 
 .paginacao {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 6px;
-    margin-top: 25px;
+    gap: 4px;
+    margin-top: 20px;
     flex-wrap: wrap;
 }
 
 .paginacao button {
-    padding: 6px 12px;
+    padding: 5px 10px;
     background-color: #141414;
     border: 1px solid #2a2a2a;
     color: #ffffff;
     border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
 }
 
 .paginacao button.ativa {
@@ -622,94 +621,119 @@ nav a:hover {
 
 /* ============== SOBRE NÓS ============== */
 .manifestos-container {
-    padding: 40px 5%;
+    padding: 25px 12px;
     background-color: #141414;
+    width: 100%;
 }
 
 .manifestos-container h2 {
     text-align: center;
-    font-size: 1.8rem;
-    margin-bottom: 25px;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
     color: #d4af37;
 }
 
 .grid-manifestos {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
 }
 
 .card-manifesto {
     background-color: #1e1e1e;
-    padding: 20px;
+    padding: 15px;
     border-radius: 8px;
     border: 1px solid #2a2a2a;
+    font-size: 0.85rem;
 }
 
 .titulo-manifesto {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: bold;
     color: #d4af37;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 /* ============== CONTATO ============== */
 .contato-secao {
-    padding: 40px 4%;
+    padding: 25px 12px;
+    width: 100%;
 }
 
 .contato-header {
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .contato-header h2 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     color: #d4af37;
+}
+
+.contato-header p {
+    font-size: 0.85rem;
 }
 
 .contato-conteudo {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 20px;
+    width: 100%;
+}
+
+.contato-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
 }
 
 .info-card {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     background-color: #141414;
-    padding: 15px;
+    padding: 12px;
     border-radius: 6px;
     border: 1px solid #2a2a2a;
 }
 
 .info-img {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     object-fit: contain;
     border-radius: 40%;
     border: 1px solid #d4af37;
     padding: 2px;
 }
 
+.info-texto h3 {
+    font-size: 0.95rem;
+}
+
+.info-texto p {
+    font-size: 0.8rem;
+}
+
 .contato-form {
     background-color: #141414;
-    padding: 20px;
+    padding: 15px;
     border-radius: 8px;
     border: 1px solid #2a2a2a;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
+    width: 100%;
 }
 
 /* ============== CHECKOUT & FINALIZAR COMPRA ============== */
 .checkout-secao {
-    padding: 30px 4%;
+    padding: 20px 12px;
+    width: 100%;
 }
 
 .checkout-header h2 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     color: #d4af37;
     text-align: center;
 }
@@ -717,7 +741,8 @@ nav a:hover {
 .checkout-container {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 20px;
+    width: 100%;
 }
 
 .checkout-container .formulario, .checkout-container .resumo {
@@ -725,7 +750,7 @@ nav a:hover {
     background-color: #141414;
     border: 1px solid #2a2a2a;
     border-radius: 8px;
-    padding: 20px;
+    padding: 15px;
 }
 
 .campo-duplo {
@@ -739,8 +764,8 @@ nav a:hover {
     border: 1px solid #2a2a2a;
     border-left: 3px solid #d4af37;
     border-radius: 6px;
-    padding: 15px;
-    margin-top: 15px;
+    padding: 12px;
+    margin-top: 10px;
 }
 
 .container-codigo-pix {
@@ -759,14 +784,15 @@ nav a:hover {
 
 /* ============== MEUS PEDIDOS ============== */
 .secao-pedidos {
-    padding: 30px 4%;
+    padding: 20px 12px;
+    width: 100%;
 }
 
 .card-pedido {
     border: 1px solid #d4af37;
     border-radius: 8px;
-    padding: 12px;
-    margin-bottom: 15px;
+    padding: 10px;
+    margin-bottom: 12px;
     background-color: #141414;
 }
 
@@ -775,50 +801,51 @@ nav a:hover {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #d4af37;
-    padding-bottom: 8px;
-    margin-bottom: 10px;
-    font-size: 0.85rem;
+    padding-bottom: 6px;
+    margin-bottom: 8px;
+    font-size: 0.8rem;
 }
 
 /* ============== RODAPÉ ============== */
 footer {
     text-align: center;
-    padding: 30px 15px;
+    padding: 20px 10px;
     background-color: #141414;
     border-top: 1px solid #2a2a2a;
+    width: 100%;
 }
 
 .footer-marca {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
+    gap: 6px;
+    margin-bottom: 6px;
 }
 
 footer img {
-    width: 35px;
+    width: 30px;
     height: auto;
 }
 
 footer h3 {
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 footer p {
     color: #a0a0a0;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
 }
 
 .voltar-topo {
     position: fixed;
-    bottom: 15px;
-    right: 15px;
+    bottom: 12px;
+    right: 12px;
     background-color: #1e1e1e;
     color: #d4af37;
     border: 1px solid #d4af37;
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -826,93 +853,73 @@ footer p {
     border-radius: 50%;
     font-weight: bold;
     z-index: 999;
+    font-size: 0.8rem;
 }
 
 .escondido {
     display: none !important;
 }
 
-/* ============== MEDIA QUERIES PARA TELAS MAIORES (TABLET E DESKTOP) ============== */
+/* ============== ADAPTAÇÃO PARA TABLETS E COMPUTADORES (ECRÃS MAIORES) ============== */
 @media (min-width: 768px) {
     header {
-        padding: 20px 5%;
-        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 15px 5%;
+    }
+
+    .logo {
+        width: auto;
     }
 
     .logo img {
-        height: 60px;
+        height: 55px;
         max-width: 200px;
     }
 
+    nav {
+        width: auto;
+        gap: 12px;
+    }
+
     nav a {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
 
     .produtos-container {
-        flex-wrap: nowrap;
+        flex-direction: row;
     }
 
     .painel-filtros {
-        flex: 1 1 240px;
+        width: 240px;
     }
 
     .catalogo-wrapper {
-        flex: 3 1 600px;
+        flex: 1;
     }
 
     .lista-produtos {
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        gap: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
     }
 
     .produto-imagem {
-        height: 320px;
+        height: 280px;
     }
 
-    .produto h3 {
-        font-size: 1.05rem;
-    }
-
-    .produto strong {
-        font-size: 1.1rem;
-    }
-
-    .botao-comprar {
-        font-size: 0.9rem;
-        padding: 10px;
-    }
-
-    .contato-conteudo {
+    .contato-conteudo, .checkout-container {
         flex-direction: row;
     }
 
-    .contato-info {
-        flex: 1 1 320px;
+    .contato-info, .checkout-container .formulario {
+        flex: 1;
     }
 
-    .contato-form {
-        flex: 1 1 420px;
+    .contato-form, .checkout-container .resumo {
+        flex: 1;
     }
 
-    .checkout-container {
-        flex-direction: row;
-    }
-
-    .checkout-container .formulario {
-        flex: 1 1 500px;
-    }
-
-    .checkout-container .resumo {
-        flex: 1 1 350px;
-        position: sticky;
-        top: 90px;
-    }
-
-    .campo-duplo {
-        flex-direction: row;
-    }
-
-    .container-codigo-pix {
+    .campo-duplo, .container-codigo-pix {
         flex-direction: row;
     }
 }
