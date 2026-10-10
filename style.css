@@ -1216,8 +1216,7 @@ ul li::marker {
 
 
 /* ==========================================================
-   RESPONSIVIDADE MOBILE — THE KING'S SON
-   Para celulares de diferentes tamanhos
+   THE KING'S SON — RESPONSIVIDADE PARA CELULAR
    ========================================================== */
 
 @media screen and (max-width: 767px) {
@@ -1259,6 +1258,11 @@ ul li::marker {
     button {
         max-width: 100%;
         font: inherit;
+    }
+
+    button,
+    a {
+        -webkit-tap-highlight-color: transparent;
     }
 
     /* CABEÇALHO */
@@ -1429,6 +1433,11 @@ ul li::marker {
         padding: 14px;
     }
 
+    .painel-filtros input,
+    .painel-filtros select {
+        max-width: 100%;
+    }
+
     /* DOIS PRODUTOS POR LINHA */
 
     .lista-produtos {
@@ -1503,114 +1512,230 @@ ul li::marker {
         min-height: 36px;
     }
 
-/* ---------- CARRINHO MOBILE: VISUAL E CLIQUES ---------- */
+    /* ======================================================
+       CARRINHO — CORREÇÃO DO ABRIR E FECHAR
+       IMPORTANTE: NÃO DEIXAR right: 0 PERMANENTEMENTE!
+       ====================================================== */
 
-.carrinho-drawer {
-    position: fixed !important;
-    top: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    left: auto !important;
+    .carrinho-drawer {
+        position: fixed !important;
+        top: 0 !important;
+        right: -100% !important;
+        bottom: 0 !important;
+        left: auto !important;
 
-    width: 100% !important;
-    max-width: 420px !important;
-    height: 100vh !important;
-    height: 100dvh !important;
+        width: 100% !important;
+        max-width: 420px !important;
 
-    margin: 0 !important;
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
+        height: 100vh !important;
+        height: 100dvh !important;
 
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: contain;
+        margin: 0 !important;
+        padding: 0 !important;
 
-    z-index: 999 !important;
-    pointer-events: auto !important;
-}
+        background-color: #141414;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
 
-.carrinho-drawer * {
-    pointer-events: auto;
-}
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
 
-.carrinho-conteudo,
-.carrinho-itens {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-}
+        border-left: 1px solid #2a2a2a;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
 
-.carrinho-conteudo {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-    padding: 16px;
-}
+        z-index: 1000 !important;
 
-.item-carrinho {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    min-width: 0;
-}
+        transition: right 0.3s ease;
+        pointer-events: none;
+    }
 
-.detalhes-item {
-    flex: 1 1 120px;
-    min-width: 0;
-    overflow-wrap: anywhere;
-}
+    /* O JavaScript adiciona .ativo ao clicar no carrinho */
 
-.controles-qtd {
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-    gap: 6px;
-}
+    .carrinho-drawer.ativo {
+        right: 0 !important;
+        pointer-events: auto;
+    }
 
-.controles-qtd button,
-.remover-item {
-    position: relative;
-    z-index: 2;
-    pointer-events: auto !important;
-    touch-action: manipulation;
-    cursor: pointer;
-}
+    /* Conteúdo interno */
 
-.controles-qtd button {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 38px;
-    height: 38px;
-    min-width: 38px;
-    min-height: 38px;
-}
+    .carrinho-conteudo {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        min-height: 100%;
+        padding: 16px;
+    }
 
-.remover-item {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 40px;
-    min-height: 40px;
-}
+    /* Cabeçalho e botão de fechar */
 
-/* Botão de fechar o carrinho */
-.carrinho-drawer button {
-    cursor: pointer;
-    touch-action: manipulation;
-}
+    .carrinho-cabecalho {
+        display: flex;
+        flex-shrink: 0;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        padding-bottom: 15px;
+    }
 
-/* Botão de finalizar compra */
-.carrinho-drawer .botao-comprar {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    min-height: 44px;
-    pointer-events: auto !important;
-    touch-action: manipulation;
-}
-    
+    .carrinho-cabecalho h3 {
+        font-size: 1.2rem;
+    }
+
+    #fechar-carrinho {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 42px;
+        height: 42px;
+        padding: 0;
+        background: transparent;
+        border: none;
+        color: #fff;
+        font-size: 1.8rem;
+        cursor: pointer;
+        pointer-events: auto;
+        touch-action: manipulation;
+    }
+
+    /* Lista de produtos do carrinho */
+
+    .carrinho-itens {
+        flex: 1 0 auto;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        margin: 16px 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .item-carrinho {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        min-width: 0;
+        padding: 12px 0;
+    }
+
+    .item-carrinho img {
+        flex: 0 0 70px;
+        width: 70px;
+        height: 90px;
+        max-width: 70px;
+        object-fit: cover;
+        border-radius: 6px;
+    }
+
+    .detalhes-item {
+        flex: 1 1 100px;
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .detalhes-item h4 {
+        font-size: 0.95rem;
+        line-height: 1.35;
+        margin: 0 0 6px;
+    }
+
+    .detalhes-item p {
+        font-size: 0.9rem;
+        margin: 4px 0;
+    }
+
+    /* Botões de aumentar e diminuir */
+
+    .controles-qtd {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 8px;
+        margin-top: 8px;
+    }
+
+    .controles-qtd button {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        min-height: 38px;
+        padding: 0;
+        background-color: #2a2a2a;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 1.2rem;
+        cursor: pointer;
+        pointer-events: auto;
+        touch-action: manipulation;
+    }
+
+    .controles-qtd span {
+        min-width: 20px;
+        text-align: center;
+    }
+
+    /* Botão de remover produto */
+
+    .remover-item {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        flex: 0 0 38px;
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        min-height: 38px;
+        padding: 0;
+        background: transparent;
+        border: none;
+        color: #ff6b6b;
+        font-size: 1.5rem;
+        cursor: pointer;
+        pointer-events: auto;
+        touch-action: manipulation;
+    }
+
+    /* Rodapé do carrinho */
+
+    .carrinho-rodape {
+        flex-shrink: 0;
+        width: 100%;
+        margin-top: auto;
+        padding-top: 15px;
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+        background-color: #141414;
+        border-top: 1px solid #2a2a2a;
+    }
+
+    .carrinho-rodape p {
+        font-size: 1rem;
+        margin: 0 0 12px;
+    }
+
+    .carrinho-rodape .botao-comprar,
+    .carrinho-rodape .botao-finalizar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        min-height: 44px;
+        padding: 12px;
+        text-align: center;
+        text-decoration: none;
+        overflow-wrap: anywhere;
+        touch-action: manipulation;
+    }
+
     /* CHECKOUT */
 
     .checkout-container {
@@ -1628,6 +1753,11 @@ ul li::marker {
         max-width: 100%;
         min-width: 0;
         margin: 0;
+        padding: 18px 14px;
+    }
+
+    .checkout-container .resumo {
+        position: static;
     }
 
     .campo-duplo {
@@ -1639,6 +1769,7 @@ ul li::marker {
 
     .campo-duplo .grupo-input,
     .campo-duplo .flex-2 {
+        flex: 1 1 auto;
         width: 100%;
         max-width: 100%;
         min-width: 0;
@@ -1668,6 +1799,7 @@ ul li::marker {
     #box-pagamento-pix .container-codigo-pix {
         display: flex;
         flex-direction: column;
+        align-items: stretch;
         gap: 10px;
         width: 100%;
         min-width: 0;
@@ -1768,7 +1900,29 @@ ul li::marker {
     }
 
     .carrinho-conteudo {
-        padding: 12px !important;
+        padding: 12px;
+    }
+
+    .item-carrinho img {
+        flex-basis: 60px;
+        width: 60px;
+        height: 80px;
+        max-width: 60px;
+    }
+
+    .detalhes-item h4 {
+        font-size: 0.85rem;
+    }
+
+    .controles-qtd {
+        gap: 5px;
+    }
+
+    .controles-qtd button {
+        width: 34px;
+        height: 34px;
+        min-width: 34px;
+        min-height: 34px;
     }
 
     .modal-conteudo {
