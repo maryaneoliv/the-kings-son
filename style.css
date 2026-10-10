@@ -1216,23 +1216,27 @@ ul li::marker {
 
 
 /* ========================================================== */
-/* 2. AJUSTES EXCLUSIVOS PARA CELULAR (MAX-WIDTH: 767PX)      */
+/* APENAS A RESPONSIVIDADE PARA CELULAR (MAX-WIDTH: 767PX)      */
 /* ========================================================== */
 @media screen and (max-width: 767px) {
 
-    /* Força o dispositivo móvel a assumir a escala correta */
-    body {
+    /* Trava o documento para evitar rolagem horizontal indesejada */
+    html, body {
         width: 100% !important;
         max-width: 100vw !important;
         overflow-x: hidden !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
     }
 
-    /* Ajuste do Cabeçalho para Mobile */
+    /* Cabeçalho compacto e centralizado */
     header {
         flex-direction: column !important;
         padding: 10px 15px !important;
         gap: 10px !important;
         width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     .logo {
@@ -1244,115 +1248,144 @@ ul li::marker {
     .logo img {
         height: 40px !important;
         width: auto !important;
-        max-width: 180px !important;
+        max-width: 160px !important;
     }
 
     nav {
         flex-wrap: wrap !important;
         justify-content: center !important;
-        gap: 8px !important;
+        gap: 6px !important;
         width: 100% !important;
     }
 
     nav a {
-        font-size: 0.75rem !important;
+        font-size: 0.72rem !important;
         white-space: nowrap;
     }
 
     .botao-entrar {
         padding: 4px 8px !important;
-        font-size: 0.7rem !important;
+        font-size: 0.68rem !important;
     }
 
-    /* Ajuste da Grade do Catálogo para 2 Colunas */
+    /* Ajuste universal para todas as seções e páginas internas */
+    main, 
+    .banner, 
+    .faixa-intro,
+    .manifestos-container, 
+    .contato-secao, 
+    .checkout-secao, 
+    .secao-pedidos, 
     .produtos {
-        padding: 20px 10px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 20px 12px !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+    }
+
+    /* Banner da página inicial */
+    .banner {
+        padding: 60px 15px !important;
+        background-size: cover !important;
+    }
+
+    .banner-texto h2 {
+        font-size: 1.8rem !important;
+    }
+
+    .banner-texto p {
+        font-size: 0.85rem !important;
+    }
+
+    /* Converte todos os grids e layouts lado a lado em coluna única */
+    .grid-manifestos,
+    .contato-conteudo, 
+    .contato-info,
+    .contato-form,
+    .checkout-container, 
+    .checkout-container .formulario, 
+    .checkout-container .resumo,
+    .campo-duplo {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        gap: 15px !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+    }
+
+    .campo-duplo .grupo-input, 
+    .campo-duplo .flex-2 {
+        min-width: 100% !important;
         width: 100% !important;
     }
 
+    /* Catálogo de produtos: exibe exatamente 2 colunas */
     .produtos-container {
         flex-direction: column !important;
         width: 100% !important;
     }
 
-    .painel-filtros {
-        width: 100% !important;
-        padding: 12px !important;
-    }
-
+    .painel-filtros,
     .catalogo-wrapper {
         width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     .lista-produtos {
+        display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 10px !important;
         width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     .produto {
         padding: 8px !important;
         width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     .produto-imagem {
-        height: 180px !important;
+        height: 160px !important;
+        width: 100% !important;
     }
 
     .produto h3 {
-        font-size: 0.8rem !important;
+        font-size: 0.78rem !important;
     }
 
     .produto strong {
-        font-size: 0.9rem !important;
+        font-size: 0.85rem !important;
     }
 
     .botao-comprar {
-        font-size: 0.75rem !important;
+        font-size: 0.72rem !important;
         padding: 8px 4px !important;
     }
 
-    /* Modais e Gaveta do Carrinho */
+    /* Gaveta do Carrinho e Modais ocupando a proporção correta */
     .carrinho-drawer {
-        max-width: 100% !important;
         width: 100% !important;
+        max-width: 100% !important;
     }
 
     .modal-conteudo {
-        width: 95% !important;
-        max-width: 95% !important;
+        width: 92% !important;
+        max-width: 92% !important;
         padding: 15px !important;
+        box-sizing: border-box !important;
     }
 
-    /* Formatação dos Blocos de Checkout e Contato */
-    .checkout-secao, .contato-secao, .manifestos-container, .secao-pedidos {
-        padding: 20px 12px !important;
-        width: 100% !important;
-    }
-
-    .checkout-container, .contato-conteudo, .campo-duplo {
-        flex-direction: column !important;
-        width: 100% !important;
-    }
-
-    .checkout-container .formulario, .checkout-container .resumo {
-        width: 100% !important;
-        padding: 15px !important;
-    }
-
-    .campo-duplo .grupo-input, .campo-duplo .flex-2 {
-        min-width: 100% !important;
-        width: 100% !important;
-    }
-
-    /* Correção do alinhamento do Pix no telemóvel */
+    /* Alinhamento e dimensões corretas da caixa de Pix no Checkout */
     #box-pagamento-pix {
         width: 100% !important;
         box-sizing: border-box !important;
         overflow: hidden !important;
         padding: 12px !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
+        margin: 15px 0 !important;
     }
 
     #box-pagamento-pix .container-codigo-pix {
@@ -1364,15 +1397,17 @@ ul li::marker {
     #box-pagamento-pix .container-codigo-pix input {
         width: 100% !important;
         max-width: 100% !important;
-        font-size: 0.7rem !important;
+        font-size: 0.68rem !important;
+        box-sizing: border-box !important;
     }
 
     #box-pagamento-pix .botao-copiar-pix {
         width: 100% !important;
         padding: 10px !important;
+        box-sizing: border-box !important;
     }
 
-    /* CORREÇÃO DOS BOTÕES DO CARRINHO (+, - E EXCLUIR) NO TOQUE */
+    /* Prioridade de toque absoluta para os botões do carrinho (+, - e X) */
     .carrinho-drawer, 
     .carrinho-conteudo, 
     .carrinho-itens, 
@@ -1401,5 +1436,12 @@ ul li::marker {
         padding: 8px !important;
         font-size: 1.5rem !important;
         touch-action: manipulation !important;
+    }
+
+    /* Rodapé mobile */
+    footer {
+        padding: 25px 15px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
     }
 }
