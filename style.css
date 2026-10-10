@@ -1918,43 +1918,91 @@ ul li::marker{
     border-radius: 8px;
 }
 /* ========================================================== */
-/* AJUSTES EXCLUSIVOS PARA CELULAR (Apenas telas menores) */
+/* 2. AJUSTES EXCLUSIVOS PARA CELULAR (APENAS TELAS MENORES) */
 /* ========================================================== */
 @media (max-width: 767px) {
-    /* O navegador só vai ler o que estiver aqui dentro quando alguém abrir pelo celular */
 
+    /* Ajuste do Cabeçalho para Mobile */
     header {
-        flex-direction: column;
-        padding: 10px 15px;
-        gap: 10px;
+        flex-direction: column !important;
+        padding: 10px 15px !important;
+        gap: 10px !important;
+    }
+
+    .logo {
+        display: flex;
+        justify-content: center;
+        width: 100%;
     }
 
     .logo img {
-        height: 40px;
-        max-width: 180px;
+        height: 40px !important;
+        width: auto !important;
+        max-width: 180px !important;
     }
 
     nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 8px;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        width: 100% !important;
     }
 
     nav a {
-        font-size: 0.75rem;
+        font-size: 0.75rem !important;
+        white-space: nowrap;
     }
 
-    /* Ajuste para 2 produtos por linha no celular */
+    .botao-entrar {
+        padding: 4px 8px !important;
+        font-size: 0.7rem !important;
+    }
+
+    /* Ajuste da Grade do Catálogo para 2 Colunas */
+    .produtos {
+        padding: 20px 10px !important;
+    }
+
+    .produtos-container {
+        flex-direction: column !important;
+    }
+
+    .painel-filtros {
+        width: 100% !important;
+        padding: 12px !important;
+    }
+
+    .catalogo-wrapper {
+        width: 100% !important;
+    }
+
     .lista-produtos {
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 10px !important;
+    }
+
+    .produto {
+        padding: 8px !important;
     }
 
     .produto-imagem {
         height: 180px !important;
     }
 
-    /* Ajuste das gavetas e modais para ocuparem bem o celular */
+    .produto h3 {
+        font-size: 0.8rem !important;
+    }
+
+    .produto strong {
+        font-size: 0.9rem !important;
+    }
+
+    .botao-comprar {
+        font-size: 0.75rem !important;
+        padding: 8px 4px !important;
+    }
+
+    /* Modais e Gaveta do Carrinho */
     .carrinho-drawer {
         max-width: 100% !important;
     }
@@ -1964,8 +2012,46 @@ ul li::marker{
         padding: 15px !important;
     }
 
-    /* Formulários e campos adaptados para toque */
-    .checkout-container, .contato-conteudo {
+    /* Formatação dos Blocos de Checkout e Contato */
+    .checkout-container, .contato-conteudo, .campo-duplo {
         flex-direction: column !important;
+    }
+
+    .checkout-container .formulario, .checkout-container .resumo {
+        width: 100% !important;
+        padding: 15px !important;
+    }
+
+    /* --------------------------------------------------------- */
+    /* CORREÇÃO DOS BOTÕES DO CARRINHO (+, - E EXCLUIR) NO TOQUE */
+    /* --------------------------------------------------------- */
+    .carrinho-drawer, 
+    .carrinho-conteudo, 
+    .carrinho-itens, 
+    .item-carrinho, 
+    .detalhes-item, 
+    .controles-qtd, 
+    .controles-qtd button, 
+    .remover-item {
+        position: relative;
+        z-index: 3000 !important;
+        pointer-events: auto !important;
+    }
+
+    .controles-qtd button {
+        min-width: 30px !important;
+        min-height: 30px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 1.1rem !important;
+        font-weight: bold !important;
+        touch-action: manipulation !important;
+    }
+
+    .remover-item {
+        padding: 8px !important;
+        font-size: 1.5rem !important;
+        touch-action: manipulation !important;
     }
 }
