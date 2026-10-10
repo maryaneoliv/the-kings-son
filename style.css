@@ -2022,34 +2022,9 @@ ul li::marker{
         padding: 15px !important;
     }
 
-    /* Correção do alinhamento do Pix no telemóvel */
-    #box-pagamento-pix {
-        width: 100% !important;
-        box-sizing: border-box !important;
-        overflow: hidden !important;
-        padding: 12px !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-    }
-
-    #box-pagamento-pix .container-codigo-pix {
-        flex-direction: column !important;
-        width: 100% !important;
-        gap: 8px !important;
-    }
-
-    #box-pagamento-pix .container-codigo-pix input {
-        width: 100% !important;
-        max-width: 100% !important;
-        font-size: 0.7rem !important;
-    }
-
-    #box-pagamento-pix .botao-copiar-pix {
-        width: 100% !important;
-        padding: 10px !important;
-    }
-
+    /* --------------------------------------------------------- */
     /* CORREÇÃO DOS BOTÕES DO CARRINHO (+, - E EXCLUIR) NO TOQUE */
+    /* --------------------------------------------------------- */
     .carrinho-drawer, 
     .carrinho-conteudo, 
     .carrinho-itens, 
