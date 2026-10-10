@@ -1918,15 +1918,23 @@ ul li::marker{
     border-radius: 8px;
 }
 /* ========================================================== */
-/* 2. AJUSTES EXCLUSIVOS PARA CELULAR (APENAS TELAS MENORES) */
+/* 2. AJUSTES EXCLUSIVOS PARA CELULAR (MAX-WIDTH: 767PX)      */
 /* ========================================================== */
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
+
+    /* Força o dispositivo móvel a assumir a escala correta */
+    body {
+        width: 100% !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+    }
 
     /* Ajuste do Cabeçalho para Mobile */
     header {
         flex-direction: column !important;
         padding: 10px 15px !important;
         gap: 10px !important;
+        width: 100% !important;
     }
 
     .logo {
@@ -1961,10 +1969,12 @@ ul li::marker{
     /* Ajuste da Grade do Catálogo para 2 Colunas */
     .produtos {
         padding: 20px 10px !important;
+        width: 100% !important;
     }
 
     .produtos-container {
         flex-direction: column !important;
+        width: 100% !important;
     }
 
     .painel-filtros {
@@ -1979,10 +1989,12 @@ ul li::marker{
     .lista-produtos {
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 10px !important;
+        width: 100% !important;
     }
 
     .produto {
         padding: 8px !important;
+        width: 100% !important;
     }
 
     .produto-imagem {
@@ -2005,16 +2017,24 @@ ul li::marker{
     /* Modais e Gaveta do Carrinho */
     .carrinho-drawer {
         max-width: 100% !important;
+        width: 100% !important;
     }
 
     .modal-conteudo {
         width: 95% !important;
+        max-width: 95% !important;
         padding: 15px !important;
     }
 
     /* Formatação dos Blocos de Checkout e Contato */
+    .checkout-secao, .contato-secao, .manifestos-container, .secao-pedidos {
+        padding: 20px 12px !important;
+        width: 100% !important;
+    }
+
     .checkout-container, .contato-conteudo, .campo-duplo {
         flex-direction: column !important;
+        width: 100% !important;
     }
 
     .checkout-container .formulario, .checkout-container .resumo {
@@ -2022,9 +2042,39 @@ ul li::marker{
         padding: 15px !important;
     }
 
-    /* --------------------------------------------------------- */
+    .campo-duplo .grupo-input, .campo-duplo .flex-2 {
+        min-width: 100% !important;
+        width: 100% !important;
+    }
+
+    /* Correção do alinhamento do Pix no telemóvel */
+    #box-pagamento-pix {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        padding: 12px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    #box-pagamento-pix .container-codigo-pix {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 8px !important;
+    }
+
+    #box-pagamento-pix .container-codigo-pix input {
+        width: 100% !important;
+        max-width: 100% !important;
+        font-size: 0.7rem !important;
+    }
+
+    #box-pagamento-pix .botao-copiar-pix {
+        width: 100% !important;
+        padding: 10px !important;
+    }
+
     /* CORREÇÃO DOS BOTÕES DO CARRINHO (+, - E EXCLUIR) NO TOQUE */
-    /* --------------------------------------------------------- */
     .carrinho-drawer, 
     .carrinho-conteudo, 
     .carrinho-itens, 
